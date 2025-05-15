@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Futurum liberorum</title>
+    <link rel="stylesheet" href="./static/css/reset.css" />
+    <link rel="stylesheet" href="./static/css/header.css" />
+    <link rel="stylesheet" href="./static/css/register.css" />
+    <script>
+        async function fetchAddress() {
+            const zipcode = document.getElementById('postal-code').value;
+            const resultDiv = document.getElementById('result');
+
+            try {
+                const response = await fetch(`/get_address?zipcode=${zipcode}`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('prefecture').value = data.prefecture;
+                    document.getElementById('city').value = data.city;
+                    document.getElementById('street').value = data.town;
+                } else {
+                    resultDiv.innerHTML = `エラー: ${data.error}`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = "エラーが発生しました。";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <img src="./static/images/icon.png" alt="Icon" class="icon">
+                    <div class="title-container">
+                        <h1>Futurum liberorum</h1>
+                        <img src="./static/images/circle_01.png" class="circle1" alt="Circle">
+                        <img src="./static/images/circle_02.png" class="circle2" alt="Circle">
+                        <h2 class="subtitle">すべての子育て世帯のための総合支援サービス</h2>
+                    </div>
+                    <div class="allSearch">
+                        <form action="/search_icon" method="GET" class="search-form">
+                            <button type="submit"><img src="./static/images/Search.png" alt="検索アイコン"
+                                    id="search-icon"></button>
+                            <input type="text" name="search_box" placeholder="何をお探しですか？" id="search-box">
+                            <p class="guest_text">ようこそ!<br>
+                                {% for data in aryData %}
+                                {{ data[1] }}
+                                {% endfor %}様
+                            </p>
+                        </form>
+                    </div>
+                    <div class="additional-text">
+                        <p>すくすくポイント：---Pt　/　ヘルプ　/　文字サイズ 大・中・小</p>
+                    </div>
+                    <div class="icon-container">
+                        <img src="./static/images/notice.png" alt="Icon 1" class="icon2">
+                        <img src="./static/images/cart.png" alt="Icon 2" class="icon2">
+                        <img src="./static/images/favorite.png" alt="Icon 3" class="icon2">
+                        <a href="/"><img src="./static/images/login.png" alt="Icon 4" class="icon2"></a>
+                    </div>
+                </div>
+            </header>
+            <nav class="all">
+                <nav class="result">ホーム　≫　ユーザー情報</nav>
+                <nav class="category">
+                    <div class="allCategory">
+                        <ul>
+                            <a href="/">
+                                <li>トップページ</li>
+                            </a>
+                            <li>お知らせ</li>
+                            <li>Futuris liberisとは</li>
+                            <a href="search.html">
+                                <li>商品を探す</li>
+                            </a>
+                            <a href="syuppinnyuuryoku.html">
+                                <li>商品を出品する</li>
+                            </a>
+                            <li>ご利用ガイド</li>
+                            <li>FAQ</li>
+                            <li>お問い合わせ</li>
+                        </ul>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+
+        <main>
+            {% for data_ac in account_datas %}
+            {% for data_da in address_datas %}
+                <div class="container2">
+                    <h3>登録情報編集</h3>
+
+                        <h4>アカウント情報</h4>
+                        <div class="applicant-info">
+
+                            <div class="input-group">
+                                <label for="name-kana">ユーザー名 <span class="required">必須</span></label>
+                                <input type="text" id="username" name="username" placeholder="例:HAL太郎"
+                                    value="{{ data_ac.accountName }}" readonly>
+                            </div>
+                            {% if errors and errors.username %}
+                            <p class="error-message">{{ errors.username }}</p>
+                            {% endif %}
+
+                            <div class="input-group">
+                                <label for="phone">電話番号 <span class="required">必須</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="例：052-XXX-XXX"
+                                    oninput="validatePhoneInput()" value="{{ data_ac.phoneNumber }}" readonly>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="postal-code">郵便番号 <span class="required"></span></label>
+                                <input type="text" id="postal-code" name="postal_code" placeholder="例:450-0002"
+                                    oninput="validatePostalInput()" value="{{ data_da.postalCode }}" readonly>
+                                <p id="result"></p>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="address">都道府県 <span class="required"></span></label>
+                                <input type="text" id="postal-code" name="postal_code" placeholder="例:450-0002"
+                                    oninput="validatePostalInput()" value="{{ data_da.prefecture }}" readonly>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="city">市区町村 <span class="required"></span></label>
+                                <input type="text" id="city" name="city" placeholder="例：名古屋市中村区"
+                                    value="{{ data_da.cityWard }}" readonly>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="street">番地 <span class="required"></span></label>
+                                <input type="text" id="street" name="street" placeholder="例：2-29"
+                                    value="{{ data_da.addressNumber }}" readonly>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="building">ビル名・建物名</label>
+                                <input type="text" id="building" name="building" placeholder="例：スパイラルタワー"
+                                    value="{{ data_da.buildingName }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="children-count">子供の人数 <span class="required">必須</span></label>
+                            <input type="text" id="postal-code" name="postal_code" placeholder="例:450-0002"
+                            oninput="validatePostalInput()" value="{{ data_ac.numberOfChildren }}" readonly>
+                        </div>
+
+                        <div class="buttons">
+                            {% for data in aryData %}
+                                <a href ="/profile?searchId={{data[0]}}"><button type="submit" class="agree-btn">戻る</button></a>
+                            {% endfor %}
+                        </div>
+                </div>
+            {% endfor %}
+            {% endfor %}
+        </main>
+
+        <footer>
+            <div class="top-bar"></div>
+            <div class="info">
+                <p id="title">Futurum liberorum　すべての子育て世帯のための総合支援サービス</p><br>
+                <p id="address">〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタワーズ <br>
+                    IH22　第3グループ　TEL：052-551-1001（ダイヤルイン）</p>
+                <div>
+                    <ul>
+                        <li>・利用規約</li>
+                        <li>・個人情報保護方針</li>
+                        <li>・情報セキュリティ方針</li>
+                        <li>・よくある質問</li>
+                        <li>・お問い合わせ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                copyright &copy;
+                <script>
+                    var hiduke = new Date();
+                    document.write(hiduke.getFullYear());
+                </script>
+                公益社団法人：全国子ども未来支援協会.All right reserved.
+            </div>
+        </footer>
+    </div>
+    <script>
+        function formatDateInput() {
+            const input = document.getElementById('birthday');
+            let value = input.value.replace(/[^0-9]/g, ''); // 数字以外を除去
+
+            // 最大8文字に制限（YYYYMMDD形式）
+            if (value.length > 8) {
+                value = value.substring(0, 8);
+            }
+
+            // 入力の長さに応じて「/」を挿入
+            if (value.length > 4 && value.length <= 6) {
+                value = value.replace(/^(\d{4})(\d{0,2})$/, '$1/$2');
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d{4})(\d{2})(\d{0,2})$/, '$1/$2/$3');
+            }
+
+            input.value = value; // 入力フィールドに再設定
+        }
+
+        function validatePhoneInput() {
+            const input = document.getElementById('phone');
+            // 入力内容を半角数字だけに制限
+            input.value = input.value.replace(/[^0-9]/g, '');
+        }
+
+        function validatePostalInput() {
+            const input = document.getElementById('postal-code');
+            let value = input.value.replace(/[^0-9]/g, ''); // 半角数字以外を削除
+
+            // 最大7文字に制限
+            if (value.length > 7) {
+                value = value.substring(0, 7);
+            }
+
+            if (value.length > 3) {
+                // 3文字目の後にハイフンを追加
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            }
+
+            input.value = value; // 入力値を更新
+        }
+    </script>
+</body>
+
+</html>

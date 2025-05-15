@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Futurum liberorum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/new_post.css') }}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon" class="icon">
+                    <div class="title-container">
+                        <h1>Futurum liberorum</h1>
+                        <img src="{{ url_for('static', filename='images/circle_01.png') }}" class="circle1" alt="Circle">
+                        <img src="{{ url_for('static', filename='images/circle_02.png') }}" class="circle2" alt="Circle">
+                        <h2 class="subtitle">すべての子育て世帯のための総合支援サービス</h2>
+                    </div>
+                    <div class="allSearch">
+                        <form action="/search_icon" method="GET" class="search-form">
+                            <button type="submit">
+                                <img src="{{ url_for('static', filename='images/Search.png') }}" alt="検索アイコン" class="search-icon">
+                            </button>
+                            <input type="text" name="search_box" placeholder="何をお探しですか？" id="search-box">
+                            <p class="guest_text">ようこそ!<br>                        
+                            {% for data in aryData %}
+                                {{ data[1] }}
+                            {% endfor %}様</p>
+                        </form>
+                    </div>
+                    <div class="additional-text">
+                        <p>すくすくポイント：                    
+                        {{ point }}
+                        Pt　/　ヘルプ　/　文字サイズ 大・中・小</p>
+                    </div>
+
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='images/notice.png') }}" alt="Icon 1" class="icon2">
+                        {% for data in aryData %}
+                            <a href ="/profile?searchId={{data[0]}}">
+                                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Icon 2" class="icon2">
+                            </a>
+                        {%endfor%}
+                            <img src="{{ url_for('static', filename='images/favorite.png') }}" alt="Icon 3" class="icon2">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='images/login.png') }}" alt="Icon 4" class="icon2">
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <nav class="all">
+                <nav class="result">ホーム　≫　育児日記投稿</nav>
+                <nav class="category">
+                    <div class="allCategory">
+                        <ul>
+                            <li><a href="/top">トップページ</a></li>
+                            <li>お知らせ</li>
+                            <li>Futurum liberorumとは</li>
+                            <li><a href="/search">商品を探す</a></li>
+                            <li><a href="/display_form">商品を出品する</a></li>
+                            <li><a href="/search_rental">レンタル品を探す</li>
+                            <li><a href="/display_form_rental">レンタルに出す</a></li>
+                            <li><a href="/post_search">育児日記</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+
+        <main>
+            <br /><br /><br /><br /><br /><br /><br /><br />
+            <div class="container_main">
+                <form action="/new_post" method="POST" enctype="multipart/form-data">
+                    <label for="post-title">タイトル</label>
+                    <input type="text" id="post-title" name="postTitle" maxlength="40" placeholder="必須（40文字まで）"
+                        required><br /><br />
+
+                    <div id="post-container1">
+                        <textarea id="post-content1" name="postContent1" rows="10"
+                            placeholder="本文1"></textarea><br /><br />
+                        <div class="image-upload">
+                            <label for="file-upload-1" class="file-upload-label">
+                                <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                    class="file-upload-icon-1">
+                            </label>
+                            <input type="file" id="file-upload-1" name="upload1" accept="image/*" multiple>
+                        </div>
+                    </div>
+
+                    <div id="post-container2" style="display: none;">
+                        <textarea id="post-content2" name="postContent2" rows="10"
+                            placeholder="本文2"></textarea><br /><br />
+                        <div class="image-upload">
+                            <label for="file-upload-2" class="file-upload-label">
+                                <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                    class="file-upload-icon-2">
+                            </label>
+                            <input type="file" id="file-upload-2" name="upload2" accept="image/*" multiple>
+                        </div>
+                    </div>
+
+                    <div id="post-container3" style="display: none;">
+                        <textarea id="post-content3" name="postContent3" rows="10"
+                            placeholder="本文3"></textarea><br /><br />
+                        <div class="image-upload">
+                            <label for="file-upload-3" class="file-upload-label">
+                                <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                    class="file-upload-icon-3">
+                            </label>
+                            <input type="file" id="file-upload-3" name="upload3" accept="image/*" multiple>
+                        </div>
+                    </div>
+
+                    <div id="post-container4" style="display: none;">
+                        <textarea id="post-content4" name="postContent4" rows="10"
+                            placeholder="本文4"></textarea><br /><br />
+                        <div class="image-upload">
+                            <label for="file-upload-4" class="file-upload-label">
+                                <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                    class="file-upload-icon-4">
+                            </label>
+                            <input type="file" id="file-upload-4" name="upload4" accept="image/*" multiple>
+                        </div>
+                    </div>
+
+                    <button type="button" id="add-post">＋ 次の入力欄</button>
+                    <button class="submit-btn">投稿</button><br /><br />
+                </form>
+            </div>
+        </main>
+
+        <div class="container">
+            <footer>
+                <div class="top-bar"></div>
+                <div class="info">
+                    <p id="title">Futurum liberorum　すべての子育て世帯のための総合支援サービス</p><br>
+                    <p id="address">〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタワーズ <br>
+                        IH22　第3グループ　TEL：052-551-1001（ダイヤルイン）</p>
+                    <div>
+                        <ul>
+                            <li>利用規約</li>
+                            <li>個人情報保護方針</li>
+                            <li>情報セキュリティ方針</li>
+                            <li>よくある質問</li>
+                            <li>お問い合わせ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    copyright &copy;
+                    <script>
+                        var hiduke = new Date();
+                        document.write(hiduke.getFullYear());
+                    </script>
+                    公益社団法人：全国子ども未来支援協会.All right reserved.
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('add-post').addEventListener('click', function () {
+            if (document.getElementById('post-container2').style.display === 'none') {
+                document.getElementById('post-container2').style.display = 'block';
+            } else if (document.getElementById('post-container3').style.display === 'none') {
+                document.getElementById('post-container3').style.display = 'block';
+            } else if (document.getElementById('post-container4').style.display === 'none') {
+                document.getElementById('post-container4').style.display = 'block';
+                document.getElementById('add-post').style.display = 'none';
+            }
+        });
+
+        // 画像を選択したときにプレビューする
+        document.getElementById("file-upload-1").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const icon = document.querySelector(".file-upload-icon-1");
+                    icon.src = e.target.result; // 選択された画像に置き換える
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 画像を選択したときにプレビューする
+        document.getElementById("file-upload-2").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const icon = document.querySelector(".file-upload-icon-2");
+                    icon.src = e.target.result; // 選択された画像に置き換える
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 画像を選択したときにプレビューする
+        document.getElementById("file-upload-3").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const icon = document.querySelector(".file-upload-icon-3");
+                    icon.src = e.target.result; // 選択された画像に置き換える
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 画像を選択したときにプレビューする
+        document.getElementById("file-upload-4").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const icon = document.querySelector(".file-upload-icon-4");
+                    icon.src = e.target.result; // 選択された画像に置き換える
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

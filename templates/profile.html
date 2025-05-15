@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Futurum liberorum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+
+
+<body>
+    <div id ="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon" class="icon">
+                    <div class="title-container">
+                        <h1>Futurum liberorum</h1>
+                        <img src="{{ url_for('static', filename='images/circle_01.png') }}" class="circle1" alt="Circle">
+                        <img src="{{ url_for('static', filename='images/circle_02.png') }}" class="circle2" alt="Circle">
+                        <h2 class="subtitle">すべての子育て世帯のための総合支援サービス</h2>
+                    </div>
+                    <div class="allSearch">
+                        <form action="/search_icon" method="GET" class="search-form">
+                            <button type="submit">
+                                <img src="{{ url_for('static', filename='images/Search.png') }}" alt="検索アイコン" id="search-icon">
+                            </button>
+                            <input type="text" name="search_box" placeholder="何をお探しですか？" class="search-box">
+                            <p class="guest_text">ようこそ!<br>                        
+                            {% for data in aryData %}
+                                {{ data[1] }}
+                            {% endfor %}様</p>
+                        </form>
+                    </div>
+                    <div class="additional-text">
+                        <p>すくすくポイント：                    
+                        {{ point }}
+                        Pt　/　ヘルプ　/　文字サイズ 大・中・小</p>
+                    </div>
+
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='images/notice.png') }}" alt="Icon 1" class="icon2">
+                        {% for data in aryData %}
+                            <a href ="/profile?searchId={{data[0]}}">
+                                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Icon 2" class="icon2">
+                            </a>
+                        {%endfor%}
+                            <img src="{{ url_for('static', filename='images/favorite.png') }}" alt="Icon 3" class="icon2">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='images/login.png') }}" alt="Icon 4" class="icon2">
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <nav class="all">
+                <nav class="result">ホーム　≫　プロフィール</nav>
+                <nav class="category">
+                    <div class="allCategory">
+                        <ul>
+                            <li><a href="/top">トップページ</a></li>
+                            <li>お知らせ</li>
+                            <li>Futurum liberorumとは</li>
+                            <li><a href="/search">商品を探す</a></li>
+                            <li><a href="/display_form">商品を出品する</a></li>
+                            <li><a href="/search_rental">レンタル品を探す</li>
+                            <li><a href="/display_form_rental">レンタルに出す</a></li>
+                            <li><a href="/post_search">育児日記</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+        <main>
+            
+                <div class="banner">
+                    <img src="{{ url_for('static', filename='images/header.png') }}" alt="バナー画像" class="banner-image">
+                </div>
+            
+                <div class="main">
+                
+                    <div class="profile">
+                        {% for data_ac in accounts %}
+                            {% if loop.first %}
+                                <a href="/update_icon"><img src="{{ data_ac.icon }}" alt="プロフィール画像" class="pro_image"></a>
+                                <div class="profile-info">
+                                    <strong>{{ data_ac.accountName }}</strong>
+                                    <span>会員ID: {{ data_ac.accountId }}</span>   
+                                    <a class="modal-open follow" data-target="modal1">フォロー: {{follower_count}}</a>
+                                    <a class="modal-open follower" data-target="modal2">フォロワー: {{ follow_count }}</a>
+                                    
+                                </div>
+                                <div id="modal1" class="modal js-modal">
+                                    <div class="modal-container">
+                                      <!-- モーダルを閉じるボタン -->
+                                      <div class="modal-close js-modal-close">×</div>
+                                      <!-- モーダル内部のコンテンツ -->
+                                      <div class="modal-content">
+                                        {% if follows %}
+                                            {% for follow_list in follows %}
+                                                <div><a href ="/profile?searchId={{follow_list.userId}}"><p>{{follow_list.accountName}}</p></a></div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>フォローしている人がいません</p>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                </div>
+                                <div id="modal2" class="modal js-modal">
+                                    <div class="modal-container">
+                                      <!-- モーダルを閉じるボタン -->
+                                      <div class="modal-close js-modal-close">×</div>
+                                      <!-- モーダル内部のコンテンツ -->
+                                      <div class="modal-content">
+                                        {% if followers %}
+                                            {% for follower_list in followers %}
+                                                <div><a href ="/profile?searchId={{follower_list.userId}}"><p>{{follower_list.accountName}}</p></a></div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>フォロワーがいません</p>
+                                        {% endif %}
+                                      </div>
+                                    </div>
+                                </div>
+                                {% for data in aryData %}
+                                {% if follow %}
+                                    {% for data_follow in follow %}
+                                        {% if not data_ac.accountId ==  data[0] %}
+                                            {% if data_follow.followerId == data[0] %}
+                                                <form action="/unfollow" method="POST">
+                                                    <input type="text" name="accountId" value="{{ data[0] }}" hidden>
+                                                    <button class="follow-btn" value="{{ data_ac.accountId }}" name="userId">フォロー解除</button>
+                                                </form>
+                                            {% else %}
+                                                <form action="/follow" method="POST">
+                                                    <input type="text" name="accountId" value="{{ data[0] }}" hidden>
+                                                    <button class="follow-btn" value="{{ data_ac.accountId }}" name="userId">フォロー</button>
+                                                </form>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% if not data_ac.accountId ==  data[0] %}
+                                        <form action="/follow" method="POST">
+                                            <input type="text" name="accountId" value="{{ data[0] }}" hidden>
+                                            <button class="follow-btn" value="{{ data_ac.accountId }}" name="userId">フォロー</button>
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        
+                    </div>
+                    <h2 class="mymenu">マイメニュー</h2>
+                    <div class="menu">
+                        <div class="menu-item">
+                            <a href="/show_address"><img src="{{ url_for('static', filename='images/Account.png') }}" alt="プロフィール">
+                            <p>プロフィール</p></a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="display_form"><img src="{{ url_for('static', filename='images/form.png') }}" alt="出品">
+                            <p>出品</p></a>
+                        </div>
+                        <div class="menu-item ready">
+                            <img src="{{ url_for('static', filename='images/Time Machine.png') }}" alt="購入履歴">
+                            <p>購入履歴</p>
+                        </div>
+                        <div class="menu-item ready">
+                            <img src="{{ url_for('static', filename='images/Star.png') }}" alt="お気に入り">
+                            <p>お気に入り</p>
+                        </div>
+                        <div class="menu-item ready">
+                            <img src="{{ url_for('static', filename='images/Favorite Cart.png') }}" alt="カート">
+                            <p>カート</p>
+                        </div>
+                        <div class="menu-item ready">
+                            <img src="{{ url_for('static', filename='images/Japanese Yen.png') }}" alt="売上金">
+                            <p>売上金</p>
+                        </div>
+                        <div class="menu-item">
+                            <a href="/dm?searchId={{ data_ac.accountId }}"><img src="{{ url_for('static', filename='images/Group Message.png') }}" alt="メッセージ">
+                            <p>メッセージ</p></a>
+                        </div>
+                        <div class="menu-item ready">
+                            <img src="{{ url_for('static', filename='images/For You.png') }}" alt="交流掲示板">
+                            <p>交流掲示板</p>
+                        </div>
+                        <div class="menu-item ready">
+                            <img src="{{ url_for('static', filename='images/Alpha Flag.png') }}" alt="イベント">
+                            <p>イベント</p>
+                        </div>
+                        <div class="menu-item">
+                            <a href="update_address"><img src="{{ url_for('static', filename='images/Gear.png') }}" alt="設定"></a>
+                            <p>設定</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h2 class="title_main2"> 出品履歴</h2>
+                <div class="grid-container">
+                    {% for data in datas %}
+                        {% if data.productPhoto %}
+                            {% if data.deletionStatus == 0 %}
+                                {% if data.listingStatus == "購入済み" %}
+                                    <div class="grid-item">
+                                        <a href="/search_id?searchId={{ data.saleId }}"><img src="{{ data.productPhoto }}" alt="商品画像" class="product_img"></a>
+                                        <div class="name_price">
+                                            <p class="p_name">{{data.productName}}</p>
+                                            <div class="price_area">
+                                                <p id="s_price">￥{{data.sellingPrice}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="overlay">SOLD OUT</div>
+                                    </div>
+                                {% else %}
+                                    <div class="grid-item">
+                                        <a href="/search_id?searchId={{ data.saleId }}"><img src="{{ data.productPhoto }}" alt="商品画像" class="product_img2"></a>
+                                        <div class="name_price">
+                                            <p class="p_name">{{data.productName}}</p>
+                                            <div class="price_area">
+                                                <p id="s_price">￥{{data.sellingPrice}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            
+                            {% else %}
+                            
+                            {% endif %}
+                        {% else %}
+                            <p>画像なし</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        </main>
+
+
+
+        <div class="container">
+            <footer>
+                <div class="top-bar"></div>
+                <div class="info">
+                    <p id="title">Futuris liberis　すべての子育て世帯のための総合支援サービス</p><br>
+                    <p id="address">〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタワーズ <br>
+                        IH22　第3グループ　TEL：052-551-1001（ダイヤルイン）</p>
+                    <div>
+                        <ul>
+                            <li>利用規約</li>
+                            <li>個人情報保護方針</li>
+                            <li>情報セキュリティ方針</li>
+                            <li>よくある質問</li>
+                            <li>お問い合わせ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    copyright &copy;
+                    <script>var hiduke = new Date();
+                    document.write(hiduke.getFullYear());</script>
+                    公益社団法人：全国子ども未来支援協会.All right reserved.
+                </div>
+            </footer>
+        </div>
+        <script>
+            // モーダルの開閉処理
+            document.querySelectorAll('.modal-open').forEach(button => {
+                button.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-target');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('is-active');
+                    }
+                });
+            });
+        
+            document.querySelectorAll('.js-modal-close').forEach(closeButton => {
+                closeButton.addEventListener('click', function() {
+                    this.closest('.js-modal').classList.remove('is-active');
+                });
+            });
+        
+            document.querySelectorAll('.js-modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('is-active');
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+
+</html>

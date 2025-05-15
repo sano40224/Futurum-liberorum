@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Futurum liberorum</title>
+    <!-- 静的ファイルのCSSをリンク -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/top.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">
+
+</head>
+
+<body>
+<div id="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon" class="icon">
+                    <div class="title-container">
+                        <h1>Futurum liberorum</h1>
+                        <img src="{{ url_for('static', filename='images/circle_01.png') }}" class="circle1" alt="Circle">
+                        <img src="{{ url_for('static', filename='images/circle_02.png') }}" class="circle2" alt="Circle">
+                        <h2 class="subtitle">すべての子育て世帯のための総合支援サービス</h2>
+                    </div>
+                    <div class="allSearch">
+                        <form action="/search" method="GET" class="search-form">
+                            <button type="submit">
+                                <img src="{{ url_for('static', filename='images/Search.png') }}" alt="検索アイコン" class="search-icon">
+                            </button>
+                            <input type="text" name="q" placeholder="何をお探しですか？" class="search-box">
+                            <p class="guest_text">ようこそ!<br>                        
+                            {% for data in aryData %}
+                                {{ data[1] }}
+                            {% endfor %}様</p>
+                        </form>
+                    </div>
+                    <div class="additional-text">
+                        <p>すくすくポイント：                    
+                        {% for data in aryData %}
+                            {{ data[3] }}
+                        {% endfor %}Pt　/　ヘルプ　/　文字サイズ 大・中・小</p>
+                    </div>
+
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='images/notice.png') }}" alt="Icon 1" class="icon2">
+                        {% for data in aryData %}
+                            <a href ="/profile?searchId={{data[0]}}">
+                                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Icon 2" class="icon2">
+                            </a>
+                        {%endfor%}
+                            <img src="{{ url_for('static', filename='images/favorite.png') }}" alt="Icon 3" class="icon2">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='images/login.png') }}" alt="Icon 4" class="icon2">
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+        </div>
+    
+
+        <main>
+            <table class="topNav">
+                <tr>
+                    <td>
+                        <a href="/search"><div class="image-text-wrapper">
+                            <img src="{{ url_for('static', filename='images/tag_01.png') }}" alt="tag" class="tag">
+                            <span class="overlay-text1">フリーマーケット</span>
+                        </div></a>
+                    </td>
+                    <td>
+                        <a href="/search_rental"><div class="image-text-wrapper">
+                            <img src="{{ url_for('static', filename='images/tag_02.png') }}" alt="tag" class="tag">
+                            <span class="overlay-text2">レンタルマーケット</span>
+                        </div></a>
+                    </td>
+                    <td>
+                        <div class="image-text-wrapper">
+                            <img src="{{ url_for('static', filename='images/tag_03.png') }}" alt="tag" class="tag">
+                            <span class="overlay-text3">子供119番</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="image-text-wrapper">
+                            <img src="{{ url_for('static', filename='images/tag_04.png') }}" alt="tag" class="tag">
+                            <span class="overlay-text3">病院検索</span>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="/post_search">
+                            <div class="image-text-wrapper">
+                                <img src="{{ url_for('static', filename='images/tag_05.png') }}" alt="tag" class="tag">
+                                <span class="overlay-text3">育児日記</span>
+                            </div>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+            <img src="{{ url_for('static', filename='images/T8.jpg') }}" alt="top" class="topImg">
+
+            <div class="srid">
+                <table class="sridTable">
+                    <tr>
+                        <td><img src="{{ url_for('static', filename='images/yajirusi_01.png') }}" alt="srid" class="sridY"></td>
+                        <td><img src="{{ url_for('static', filename='images/banner_01.png') }}" alt="srid" class="sridImg"></td>
+                        <td><img src="{{ url_for('static', filename='images/banner_02.png') }}" alt="srid" class="sridImg"></td>
+                        <td><img src="{{ url_for('static', filename='images/banner_03.png') }}" alt="srid" class="sridImg"></td>
+                        <td><img src="{{ url_for('static', filename='images/banner_04.png') }}" alt="srid" class="sridImg"></td>
+                        <td><img src="{{ url_for('static', filename='images/yajirusi_02.png') }}" alt="srid" class="sridY"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 以下、他の画像をすべて追加 -->
+            <img src="{{ url_for('static', filename='images/tentative_01.png') }}" width="600" alt="mainImage1" class="tentative-image img1">
+            <img src="{{ url_for('static', filename='images/tentative_02.png') }}" width="265" alt="mainImage2" class="tentative-image img2">
+            <img src="{{ url_for('static', filename='images/tentative_03.png') }}" width="600" alt="mainImage3" class="tentative-image img3">
+            <img src="{{ url_for('static', filename='images/tentative_04.png') }}" width="265" alt="mainImage4" class="tentative-image img4">
+            <img src="{{ url_for('static', filename='images/tentative_05.png') }}" width="600" alt="mainImage5" class="tentative-image img5">
+            <img src="{{ url_for('static', filename='images/tentative_06.png') }}" width="265" alt="mainImage6" class="tentative-image img6">
+            <img src="{{ url_for('static', filename='images/tentative_07.png') }}" width="250" alt="mainImage7" class="tentative-image img7">
+            <img src="{{ url_for('static', filename='images/tentative_08.png') }}" width="250" alt="mainImage8" class="tentative-image img8">
+            <img src="{{ url_for('static', filename='images/tentative_09.png') }}" width="250" alt="mainImage9" class="tentative-image img9">
+            <img src="{{ url_for('static', filename='images/tentative_10.png') }}" width="250" alt="mainImage10" class="tentative-image img10">
+            <img src="{{ url_for('static', filename='images/tentative_11.png') }}" width="250" alt="mainImage11" class="tentative-image img11">
+            <img src="{{ url_for('static', filename='images/tentative_12.png') }}" width="250" alt="mainImage12" class="tentative-image img12">
+            <img src="{{ url_for('static', filename='images/tentative_13.png') }}" width="900" alt="mainImage13" class="tentative-image img13">
+        </main>
+
+        <div class="container">
+            <footer id="footer_top">
+                <div class="top-bar"></div>
+                <div class="info">
+                    <p id="title">Futurum liberorum　すべての子育て世帯のための総合支援サービス</p><br>
+                    <p id="address">〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタワーズ <br>
+                        IH22　第3グループ　TEL：052-551-1001（ダイヤルイン）</p>
+                    <div>
+                        <ul>
+                            <li>利用規約</li>
+                            <li>個人情報保護方針</li>
+                            <li>情報セキュリティ方針</li>
+                            <li>よくある質問</li>
+                            <li>お問い合わせ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    copyright &copy;
+                    <script>
+                        var hiduke = new Date();
+                        document.write(hiduke.getFullYear());
+                    </script>
+                    公益社団法人：全国子ども未来支援協会.All right reserved.
+                </div>
+            </footer>
+        </div>
+</div>
+</body>
+    
+    </html>
