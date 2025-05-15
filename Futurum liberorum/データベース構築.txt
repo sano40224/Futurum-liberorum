@@ -1,0 +1,385 @@
+DROP DATABASE IH22DB;
+
+CREATE DATABASE IF NOT EXISTS IH22DB;
+
+USE IH22DB;
+
+CREATE TABLE t_account (
+    accountId INT PRIMARY KEY,
+    accountName VARCHAR(100),
+    icon VARCHAR(255),
+    tutorialFlag TINYINT,
+    points INT,
+    notification TINYINT,
+    wishlistVisibility TINYINT,
+    parentAge INT,
+    numberOfChildren INT,
+    password VARCHAR(255),
+    emailAddress VARCHAR(255),
+    lastName VARCHAR(100),
+    firstName VARCHAR(100),
+    lastNameKana VARCHAR(100),
+    firstNameKana VARCHAR(100),
+    gender VARCHAR(20),
+    birthDate DATE,
+    phoneNumber VARCHAR(50)
+);
+
+CREATE TABLE t_category (
+    categoryId INT PRIMARY KEY,
+    categoryName VARCHAR(100)
+);
+
+CREATE TABLE t_sale (
+    saleId INT PRIMARY KEY,
+    accountId INT,
+    categoryId INT,
+    productName VARCHAR(100),
+    productCondition VARCHAR(50),
+    productDescription TEXT,
+    sellingPrice DECIMAL(10, 2),
+    shippingPayer VARCHAR(20),
+    shippingEstimate VARCHAR(50),
+    listingDateTime DATETIME,
+    listingStatus VARCHAR(20),
+    deletionStatus TINYINT,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (categoryId) REFERENCES t_category(categoryId)
+);
+
+CREATE TABLE t_rental (
+    rentalId INT PRIMARY KEY,
+    accountId INT,
+    categoryId INT,
+    rentalProductName VARCHAR(100),
+    rentalProductCondition VARCHAR(50),
+    rentalDescription TEXT,
+    rentalPrice DECIMAL(10, 2),
+    rentalShippingPayer VARCHAR(20),
+    rentalShippingEstimate VARCHAR(50),
+    rentalPeriod VARCHAR(10),
+    rentalListingDateTime DATETIME,
+    rentalListingStatus VARCHAR(20),
+    rentalDeletionStatus TINYINT,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (categoryId) REFERENCES t_category(categoryId)
+);
+
+CREATE TABLE t_salePhoto (
+    salePhotoId INT PRIMARY KEY,
+    saleId INT,
+    productPhoto VARCHAR(255),
+    FOREIGN KEY (saleId) REFERENCES t_sale(saleId)
+);
+
+CREATE TABLE t_rentalPhoto (
+    rentalPhotoId INT PRIMARY KEY,
+    rentalId INT,
+    rentalPhoto VARCHAR(255),
+    FOREIGN KEY (rentalId) REFERENCES t_rental(rentalId)
+);
+
+CREATE TABLE t_saleCategoryStatus (
+    saleCategoryStatusId INT PRIMARY KEY,
+    saleId INT,
+    categoryId INT,
+    FOREIGN KEY (saleId) REFERENCES t_sale(saleId),
+    FOREIGN KEY (categoryId) REFERENCES t_category(categoryId)
+);
+
+CREATE TABLE t_rentalCategoryStatus (
+    rentalCategoryStatusId INT PRIMARY KEY,
+    rentalId INT,
+    categoryId INT,
+    FOREIGN KEY (rentalId) REFERENCES t_rental(rentalId),
+    FOREIGN KEY (categoryId) REFERENCES t_category(categoryId)
+);
+
+CREATE TABLE t_saleLike (
+    saleLikeId INT AUTO_INCREMENT PRIMARY KEY,
+    saleId INT NOT NULL,
+    accountId INT NOT NULL,
+    FOREIGN KEY (saleId) REFERENCES t_sale(saleId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_rentalLike (
+    rentalLikeId INT AUTO_INCREMENT PRIMARY KEY,
+    rentalId INT NOT NULL,
+    accountId INT NOT NULL,
+    FOREIGN KEY (rentalId) REFERENCES t_rental(rentalId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_saleComment (
+    saleCommentId INT AUTO_INCREMENT PRIMARY KEY,
+    saleId INT NOT NULL,
+    accountId INT NOT NULL,
+    productCommentContent TEXT,
+    productCommentDeletionStatus TINYINT,
+    FOREIGN KEY (saleId) REFERENCES t_sale(saleId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_rentalComment (
+    rentalCommentId INT AUTO_INCREMENT PRIMARY KEY,
+    rentalId INT NOT NULL,
+    accountId INT NOT NULL,
+    rentalCommentContent TEXT,
+    rentalCommentDeletionStatus TINYINT,
+    FOREIGN KEY (rentalId) REFERENCES t_rental(rentalId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_saleTransaction (
+    saleTransactionId INT AUTO_INCREMENT PRIMARY KEY,
+    saleId INT NOT NULL,
+    accountId INT NOT NULL,
+    productPaymentMethod VARCHAR(50),
+    productTransactionStatus TINYINT,
+    FOREIGN KEY (saleId) REFERENCES t_sale(saleId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_rentalTransaction (
+    rentalTransactionId INT AUTO_INCREMENT PRIMARY KEY,
+    rentalId INT NOT NULL,
+    accountId INT NOT NULL,
+    rentalPaymentMethod VARCHAR(50),
+    rentalTransactionStatus TINYINT,
+    FOREIGN KEY (rentalId) REFERENCES t_rental(rentalId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_rating (
+    ratingId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    evaluatorId INT NOT NULL,
+    ratingStars TINYINT,
+    ratingComment TEXT,
+    ratingDeletionStatus TINYINT,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (evaluatorId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_saleTransactionMessage (
+    saleTransactionMessageId INT AUTO_INCREMENT PRIMARY KEY,
+    saleTransactionId INT NOT NULL,
+    accountId INT NOT NULL,
+    productTransactionMessageContent TEXT,
+    productTransactionSendDateTime DATETIME,
+    productTransactionMessageDeletionStatus TINYINT,
+    FOREIGN KEY (saleTransactionId) REFERENCES t_saleTransaction(saleTransactionId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_rentalTransactionMessage (
+    rentalTransactionMessageId INT AUTO_INCREMENT PRIMARY KEY,
+    rentalTransactionId INT NOT NULL,
+    accountId INT NOT NULL,
+    rentalTransactionMessageContent TEXT,
+    rentalTransactionSendDateTime DATETIME,
+    rentalTransactionMessageDeletionStatus TINYINT,
+    FOREIGN KEY (rentalTransactionId) REFERENCES t_rentalTransaction(rentalTransactionId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_directMessage (
+    directMessageId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    senderId INT NOT NULL,
+    directMessageContent TEXT,
+    directMessageAttachedMedia VARCHAR(255),
+    directSendDateTime DATETIME,
+    directMessageDeletionStatus TINYINT,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_wishlist (
+    wishlistId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    wishlistWord VARCHAR(255),
+    wishlistPrice DECIMAL(10, 2),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_follow (
+    followId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    followerId INT NOT NULL,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (followerId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_block (
+    blockId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    blockerId INT NOT NULL,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (blockerId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_post (
+    postId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    postTitle VARCHAR(255),
+    postDateTime DATETIME,
+    postVisibilityStatus TINYINT,
+    postDeletionStatus TINYINT,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_postContent (
+    postContentId INT AUTO_INCREMENT PRIMARY KEY,
+    postId INT NOT NULL,
+    postText TEXT,
+    FOREIGN KEY (postId) REFERENCES t_post(postId)
+);
+
+CREATE TABLE t_postMedia (
+    postMediaId INT AUTO_INCREMENT PRIMARY KEY,
+    postContentId INT NOT NULL,
+    postAttachedMedia VARCHAR(255),
+    FOREIGN KEY (postContentId) REFERENCES t_postContent(postContentId)
+);
+
+CREATE TABLE t_postLike (
+    postLikeId INT AUTO_INCREMENT PRIMARY KEY,
+    postId INT NOT NULL,
+    accountId INT NOT NULL,
+    FOREIGN KEY (postId) REFERENCES t_post(postId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_postComment (
+    postCommentId INT AUTO_INCREMENT PRIMARY KEY,
+    postId INT NOT NULL,
+    accountId INT NOT NULL,
+    postCommentContent TEXT,
+    postCommentDeletionStatus TINYINT,
+    FOREIGN KEY (postId) REFERENCES t_post(postId),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_reportReason (
+    reportReasonId INT AUTO_INCREMENT PRIMARY KEY,
+    reportReasonText TEXT
+);
+
+CREATE TABLE t_userReport (
+    userReportId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    userReportComment TEXT,
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_saleReport (
+    saleReportId INT AUTO_INCREMENT PRIMARY KEY,
+    saleId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    productReportComment TEXT,
+    FOREIGN KEY (saleId) REFERENCES t_sale(saleId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_rentalReport (
+    rentalReportId INT AUTO_INCREMENT PRIMARY KEY,
+    rentalId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    rentalReportComment TEXT,
+    FOREIGN KEY (rentalId) REFERENCES t_rental(rentalId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_saleCommentReport (
+    saleCommentReportId INT AUTO_INCREMENT PRIMARY KEY,
+    saleCommentId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    productCommentReportComment TEXT,
+    FOREIGN KEY (saleCommentId) REFERENCES t_saleComment(saleCommentId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_rentalCommentReport (
+    rentalCommentReportId INT AUTO_INCREMENT PRIMARY KEY,
+    rentalCommentId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    rentalCommentReportComment TEXT,
+    FOREIGN KEY (rentalCommentId) REFERENCES t_rentalComment(rentalCommentId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_postReport (
+    postReportId INT AUTO_INCREMENT PRIMARY KEY,
+    postId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    postReportComment TEXT,
+    FOREIGN KEY (postId) REFERENCES t_post(postId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_postCommentReport (
+    postCommentReportId INT AUTO_INCREMENT PRIMARY KEY,
+    postCommentId INT NOT NULL,
+    senderId INT NOT NULL,
+    reportReasonId INT NOT NULL,
+    postCommentReportComment TEXT,
+    FOREIGN KEY (postCommentId) REFERENCES t_postComment(postCommentId),
+    FOREIGN KEY (senderId) REFERENCES t_account(accountId),
+    FOREIGN KEY (reportReasonId) REFERENCES t_reportReason(reportReasonId)
+);
+
+CREATE TABLE t_donation (
+    donationId INT AUTO_INCREMENT PRIMARY KEY,
+    postId INT NOT NULL,
+    throwPoints INT,
+    throwComment TEXT,
+    FOREIGN KEY (postId) REFERENCES t_post(postId)
+);
+
+CREATE TABLE t_address (
+    addressId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    postalCode VARCHAR(20),
+    prefecture VARCHAR(50),
+    cityWard VARCHAR(100),
+    addressNumber VARCHAR(50),
+    buildingName VARCHAR(100),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+CREATE TABLE t_creditCard (
+    creditCardId INT AUTO_INCREMENT PRIMARY KEY,
+    accountId INT NOT NULL,
+    creditCardNumber VARCHAR(50),
+    FOREIGN KEY (accountId) REFERENCES t_account(accountId)
+);
+
+
+
+INSERT INTO t_account (
+    accountId, accountName,icon, tutorialFlag, points, notification, wishlistVisibility, parentAge, 
+    numberOfChildren, password, emailAddress, lastName, firstName, lastNameKana, firstNameKana, gender, 
+    birthDate, phoneNumber
+) VALUES
+(00001, 'test', './static/images\default_icon.jpg' ,0, 100000, 0, 0, 40, 2, 'test1234', 'test@test', '手酢', '斗忠', 'テス', 'トチュウ', '男性', '2000-01-01', '09012345678');
+
+INSERT INTO t_category (
+    categoryId, categoryName
+) VALUES
+(00001, '子供服'),(00002, 'ベビー＆マタニティ'),(00003,'育児用品'),(00004,'ベビー用品');
