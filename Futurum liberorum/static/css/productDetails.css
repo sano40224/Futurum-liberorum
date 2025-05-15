@@ -1,0 +1,443 @@
+@charset "utf-8";
+/* メインコンテンツ */
+main {
+    background-color: #FFECEB;
+    width: calc(100% - 25.2vh); /* 左右100pxずつのスペースを確保 */
+    margin: 0 auto; /* コンテンツを中央揃え */
+    display: flex; /* Flexboxを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    min-height: 80vh; /* mainの高さを画面の80%に設定 */
+}
+
+/* 商品詳細部分 */
+.product-details {
+    display: flex; /* Flexboxを使用して横並びにする */
+    gap: 20px; /* 左右の要素の間隔 */
+    padding: 40px; /* 余白を追加 */
+    max-width: 1200px; /* 最大幅を設定 */
+    width: 100%; /* 幅を100%に設定 */
+}
+
+/* 左側: サムネイル画像 */
+.image-container {
+    display: flex;
+    flex-direction: column; /* 画像を縦に並べる */
+    gap: 10px; /* 画像間の間隔 */
+}
+
+.image-container img {
+    width: 100px; /* サムネイル画像の幅 */
+    height: 100px; /* サムネイル画像の高さ */
+    object-fit: cover; /* 画像を枠内に収める */
+    border-radius: 10px; /* 角を丸くする */
+}
+
+/* 右側: メイン画像と商品情報 */
+.image-title-container {
+    display: flex; /* Flexboxを使用して横並びにする */
+    gap: 14vw; /* 画像と商品情報の間隔 */
+    align-items: flex-start; /* 上揃えにする */
+}
+
+.large-image {
+    width: 450px; /* メイン画像の幅 */
+    height: 450px; /* メイン画像の高さ */
+    object-fit: cover; /* 画像を枠内に収める */
+    border-radius: 10px; /* 角を丸くする */
+}
+
+/* 商品情報 */
+.product-info {
+    display: flex;
+    flex-direction: column; /* 商品情報を縦に並べる */
+    gap: 10px; /* 各要素の間隔 */
+}
+
+.image-title {
+    font-size: 2rem; /* タイトルのフォントサイズ */
+    color: #333; /* タイトルの色 */
+    padding-top: 4vh;
+    position: relative;
+    left: -30px;
+}
+
+.image-info {
+    font-size: 1.5rem; /* 価格のフォントサイズ */
+    color: #555; /* 価格の色 */
+    margin: 0; /* マージンをリセット */
+    padding-top: 3vh;
+    position: relative;
+    left: -30px;
+}
+
+.custom-button {
+    background-color: #6f2b92; /* ボタンの背景色 */
+    color: white; /* テキストの色 */
+    padding: 10px 20px; /* パディング */
+    font-size: 1.2rem; /* フォントサイズ */
+    border: none; /* ボーダーをなくす */
+    border-radius: 5px; /* 角を丸くする */
+    cursor: pointer; /* ホバー時にカーソルをポインターに */
+    width: fit-content; /* ボタンの幅を内容に合わせる */
+    margin-top: 3vh;
+    margin-left: 4.5vw;
+}
+
+.image-grid {
+    display: flex;
+    gap: 10px; /* アイコン間の間隔 */
+    margin-top: 2vh; /* 上の要素との間隔 */
+    margin-left: 1vw;
+    position: relative;
+    left: -45px;
+
+}
+
+.grid-image {
+    width: 60px; /* アイコンの幅 */
+    height: 60px; /* アイコンの高さ */
+    object-fit: cover; /* 画像を枠内に収める */
+    border-radius: 10px; /* 角を丸くする */
+}
+
+.product-description {
+    margin-top: 2vh; /* アイコンとの間隔を調整 */
+    margin-left: -2vw;
+    padding: 1.5vh;
+    /*background-color: #fff; !* 背景色を白に *!*/
+    border-radius: 10px; /* 角を丸く */
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); !* 軽く影をつける *!*/
+    max-width: 800px;
+    width: 100%;
+}
+
+.product-description h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1vh;
+    position: relative;
+    left: -10px;
+}
+
+.product-description p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.5;
+    position: relative;
+    left: -10px;
+}
+
+.product-info{
+    position: relative;
+    left: 550px;
+    top: -25px;
+    width: 400px;
+}
+.product-info-line {
+    border-top: 2px solid #333; /* 上の線 */
+    border-bottom: 2px solid #333; /* 下の線 */
+    padding: 10px 0; /* 上下にパディングを追加 */
+    margin-top: 20px; /* 上部にスペースを追加 */
+    max-width: 600px; /* 最大幅を設定 */
+    width: 100%; /* 幅を100%に設定 */
+    margin-left: -2vw;
+}
+
+.product-info-line p {
+    font-size: 1.2rem; /* フォントサイズを調整 */
+    color: #333; /* テキストカラー */
+    margin-top:2vh; /* 上下に少しスペースを追加 */
+    margin-bottom: 2vh;
+}
+
+.product-info-line strong {
+    font-weight: bold; /* 強調部分を太字に */
+}
+
+#product_image1{
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 330px;
+}
+
+#product_image2{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left:230px;
+}
+
+#product_image3{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 230px;
+    top: 340px;
+}
+
+#product_image4{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 230px;
+    top: 430px;
+}
+
+      /* モーダルと背景の指定 */
+      .modal{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background: rgba(0,0,0,50%);
+        padding: 40px 20px;
+        overflow: auto;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+        box-sizing: border-box;
+        z-index: 3;
+      }
+      
+      /* モーダルの擬似要素の指定 */
+      .modal:before{
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        margin-left: -0.2em;
+      }
+      
+      /* クラスが追加された時の指定 */
+      .modal.is-active{
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* モーダル内側の指定 */
+      .modal-container{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 600px;
+        width: 90%;
+      }
+      
+      /* モーダルを閉じるボタンの指定 */
+      .modal-close{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -20px;
+        right: -20px;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        background: #000;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      
+      /* モーダルのコンテンツ部分の指定 */
+      .modal-content{
+        background: #ffffff;
+        text-align: left;
+        line-height: 1.8;
+        padding: 20px;
+      }
+      .modal-text{
+        border: #000 solid 1px;
+        width: 400px;
+      }
+
+      .modal-text{
+        height: 2rem;
+    }
+        
+      /* モーダルのコンテンツ部分のテキストの指定 */
+      .modal-content p{
+        padding: 1em 0;
+      }
+      .modal-comment{
+          padding: 2px 10px 2px 10px;
+          margin: 0 0 0 30px;
+          cursor: pointer;
+          text-align: center; /* 中央揃え */
+          display: inline-block; /* インラインブロック要素として表示 */
+          text-decoration: none; /* リンクの下線を削除 */
+          color: #fff; /* 文字色を白に設定 */
+          border-radius: 5px; /* 角を丸くする */
+          font-size: 1em; /* フォントサイズを調整 */
+          background-color: #ff0000;
+      }
+      .comment_in{
+        cursor: pointer;
+    }
+    .comments {
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        max-height: 200px;
+        width: 260px;
+        position: absolute;
+        top: 600px;
+        left:330px;
+        overflow-y: auto;
+    }
+    
+    .comments h2 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+        color: #333;
+    }
+    .comments .comment_text {
+        color: #333;
+        display: inline-block !important;
+        background-color: rgb(217, 217, 217);
+        max-width: 260px;
+        padding: 7px 10px 7px 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+        display: block;
+    }
+    .comment_num{
+        position:absolute;
+        top: 570px;
+        left: 330px;
+    }
+    .user_name:first-child{
+        margin-top: 0px;
+    }
+    .user_name{
+        margin-top: 10px;
+    }
+    .button {
+        padding: 10px;
+        cursor: pointer;
+        text-align: center; /* 中央揃え */
+        display: inline-block; /* インラインブロック要素として表示 */
+        text-decoration: none; /* リンクの下線を削除 */
+        color: #fff; /* 文字色を白に設定 */
+        border-radius: 5px; /* 角を丸くする */
+        font-size: 1em; /* フォントサイズを調整 */
+
+    }
+    .left-buttons button {
+        position: relative;
+        top: 10px;
+        left: -80px;
+    }
+
+    .buy-now {
+        background-color: #ff4500; /* 今すぐ買うボタンの背景色 */
+        margin: 0 0 0 130px;
+    }
+    .unBuy-now {
+        background-color: #ff4500; /* 今すぐ買うボタンの背景色 */
+        margin: 0 0 0 50px;
+    }
+
+    .delete{
+        background-color: #303030; /* 今すぐ買うボタンの背景色 */
+        margin: 0 0 0 20px;
+        position: absolute !important;
+        top: 141px !important;
+        left: 195px !important;
+    }
+
+    .edit{
+        background-color: #6f2b92;
+        margin: 0 0 0 20px;
+    }
+
+    .payMethod{
+        width: 200px;
+        font-size: 1.2rem;
+        margin: 20px 0 0 0;
+    }
+
+    #modal-payMethod{
+        padding: 2px 10px 2px 10px;
+        position: relative;
+        left: 300px;
+        top: -30px;
+        cursor: pointer;
+        text-align: center; /* 中央揃え */
+        display: inline-block; /* インラインブロック要素として表示 */
+        text-decoration: none; /* リンクの下線を削除 */
+        color: #fff; /* 文字色を白に設定 */
+        border-radius: 5px; /* 角を丸くする */
+        font-size: 1em; /* フォントサイズを調整 */
+        background-color: #ff0000;
+    }
+
+    .payMethod-info{
+        width: 300px;
+    }
+
+    #modal-payMethod{
+        position: relative;
+        left: 400px;
+    }
+
+    .error-message{
+        padding: 30px 0 0 15px ;
+        color: #ff0000;
+    }
+
+.saler{
+    position: absolute;
+    top: 700px;
+    left: 330px;
+    padding: 0 0 10px 0;
+    border-bottom: solid #000 2px;
+}
+
+.saler-exp{
+    margin: 10px 0 0 0;
+}
+
+.saler-name{
+    padding: 0 0 0 10px;
+}
+
+.saler-icon{
+    clip-path: circle(50% at center);
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .product-details {
+        flex-direction: column; /* スマホでは縦並びにする */
+        align-items: center; /* 中央揃え */
+    }
+
+    .image-container {
+        flex-direction: row; /* サムネイル画像を横並びにする */
+        justify-content: center; /* 中央揃え */
+    }
+
+    .image-title-container {
+        flex-direction: column; /* スマホでは縦並びにする */
+        align-items: center; /* 中央揃え */
+    }
+
+    .large-image {
+        width: 100%; /* メイン画像の幅を100%にする */
+        height: auto; /* 高さを自動調整 */
+    }
+
+    .product-info {
+        align-items: center; /* 商品情報を中央揃えにする */
+        text-align: center; /* テキストを中央揃えにする */
+    }
+}

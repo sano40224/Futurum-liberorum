@@ -1,0 +1,336 @@
+@charset "utf-8";
+
+body {
+    font-family: 'メイリオ', 'Meiryo', 'Hiragino Kaku Gothic Pro', sans-serif;
+    background-color: #f5f5dc; /* 左右スペースの背景色 */
+    margin: 0;
+    flex-direction: column;
+    min-height: 790px;
+    overflow-x: hidden; /* 横方向のスクロールを無効化 */
+    box-sizing: border-box; /* パディングを含めて幅を計算 */
+}
+
+#wrapper{
+    width: 1183px;
+    margin: 0 auto 0 auto;
+    background-color: #FFECEB;
+}
+.container {
+    width: 1183px;
+    margin: 0 auto 0 auto;
+    background-color: #FFECEB;
+}
+
+
+header {
+    background-color: #FFECEB;
+    /*padding-top: 8%;*/
+    position: relative; /* relative positioning to position the icon absolutely inside the header */
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    /*padding: 10px;*/
+}
+.header-content{
+    height: 148px;
+}
+
+
+title-container {
+    display: flex;
+    flex-direction: column; /* h1とh2を縦に並べる */
+    align-items: flex-start; /* 左揃えにする */
+    margin-left: 10px; /* アイコンとタイトルの間にスペースを追加 */
+}
+
+.search-form {
+    position: absolute; /* 絶対位置で調整 */
+    top: 8px;  /* 上方向に移動 */
+    right: 735px; /* 右方向に移動 */
+    display: flex;
+    align-items: center;
+}
+
+.container button{
+    height:40px;
+    width: 40px;
+    position: relative;
+    top: 30px;
+    left: 364px;
+}
+
+.search-icon {
+    height: 40px; /* 検索ボックスと同じ高さに調整 */
+    width: 40px; /* 任意の幅に調整 */
+    position: relative;
+    top: -3px;
+    left:-7px;
+    z-index: 1;
+}
+
+.search-box {
+    padding: 10px 10px;
+    font-size: 16px;
+    border: 0.12px solid #ccc;
+    width: 202px;
+    text-align: center;
+    position: relative;
+    top: 30px;
+    left: 363px;
+}
+
+.guest_text {
+    padding: 8.927px 9.954px;
+    font-size: 9.954px;
+    background-color: #ffffff; /* ボタンの背景色 */
+    color: black;
+    border: none;
+    position: relative;
+    top: 29.941px;
+    left:362.61px;
+}
+
+.search-button:hover {
+    background-color: #b8b8b8; /* ホバー時の色 */
+}
+
+.additional-text {
+    padding: 19.908px;
+    text-align: center; /* テキストを中央揃え */
+    margin-top: 49.928px; /* 上部のマージン */
+    margin-left: 79.869px;
+}
+
+.additional-text p {
+    font-size: 1rem; /* フォントサイズ */
+    color: #333; /* テキストカラー */
+    position: relative;
+    top: -147.256px;
+    left: -29.941px;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 4.977px;
+}
+
+.icon2 {
+    width: 79.869px;  /* アイコンのサイズ */
+    height: 79.869px;
+    margin-left: 9.954px;  /* アイコン間のスペース */
+    position: relative;
+    top: -263.386px;
+    right: 0px;
+}
+
+.container h1 {
+    color: #f9e8e8;
+    background-color: #6f2b92;
+    padding: 7.979px 9.954px;
+    border-radius: 4.977px;
+    display: inline-block; /* 背景色がテキストの長さに合わせて調整される */
+    position: relative;
+    top: -75.192px;
+    left: 124.82px;
+}
+
+img.circle1 {
+    position: absolute;
+    top: -59.882px; /* 調整可能 */
+    left: 299.568px; /* 調整可能 */
+    width: 149.784px; /* 調整可能 */
+    height: auto; /* アスペクト比を保つ */
+}
+
+img.circle2 {
+    position: absolute;
+    top: -89.823px; /* 調整可能 */
+    left: 369.483px; /* 調整可能 */
+    width: 149.784px; /* 調整可能 */
+    height: auto; /* アスペクト比を保つ */
+}
+
+.subtitle {
+    font-size: 1rem; /* フォントサイズを指定 */
+    color: #333; /* サブタイトルの文字色 */
+    margin-top: 9.954px; /* h1との間にスペースを追加 */
+    text-align: left; /* 左揃えにする */
+    position: relative;
+    width: 219.849px;
+    line-height: 1.3rem;
+    top: -69.836px;
+    left: 124.82px;
+}
+
+.icon {
+    width: 99.856px; /* 幅 */
+    height: 99.856px; /* 高さ */
+    margin-right: 19.908px; /* アイコンと h1 の間にスペースを追加 */
+    margin-left: 19.908px;
+    position: relative;
+    top: 14.931px;
+    left: 0;
+}
+
+nav.all {
+    height: 59.882px;
+    box-shadow: 0 -3.95px 7.979px rgba(0, 0, 0, 0.2); /* 影の設定 */
+}
+
+nav.category {
+    background-color: #ffffff;
+    height: 31.6px;
+}
+
+.allCategory {
+    display: flex;
+    justify-content: center; /* 横方向に中央揃え */
+    align-items: center; /* 縦方向に中央揃え */
+    height: 100%; /* 高さを100%に設定して親要素に合わせる */
+}
+
+.allCategory ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* デフォルトのリストスタイルを無効化 */
+}
+
+.allCategory ul li {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    padding-left: 19.908px; /* 疑似要素の余白を設定 */
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.allCategory ul li a{
+    display: inline-block;
+    padding: 2px;
+}
+
+
+.allCategory ul li span {
+    text-decoration: underline; /* テキストに下線を追加 */
+    line-height: 1.5; /* テキストの行の高さを調整 */
+}
+
+.allCategory ul li a:hover{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.result {
+    justify-content: center; /* テキストを中央揃え */
+    align-items: center; /* テキストを垂直方向に中央揃え */
+}
+
+nav.result {
+    background-color: #D9D9D9;
+    height: 29.941px;
+    display: flex; /* Flexbox を使用して中央揃え */
+    justify-content: center; /* 横方向に中央揃え */
+    align-items: center; /* 縦方向に中央揃え */
+}
+main{
+    background-color: #FFECEB;
+    margin: 0 auto; /* コンテンツを中央揃え */
+}
+
+footer {
+    background-color: #666C76;
+    text-align: center;
+    padding: 10px 0; /* 上下にパディングを追加してスペースを確保 */
+    box-sizing: border-box;
+    position: relative;
+}
+
+footer .top-bar {
+    height: 10px;
+    background-color: #E39E9E; /* 変更したい色を指定 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+div.info {
+    background-color: #D9D9D9;
+    padding: 20px; /* 全体にパディングを追加してスペースを確保 */
+    margin-bottom: 10px; /* 下部にスペースを追加 */
+}
+
+div.copyright {
+    background-color: #666C76;
+    color: white;
+    height: 40px; /* フッター内の内容の高さを調整 */
+    display: flex;
+    justify-content: center; /* テキストを中央揃え */
+    align-items: center; /* テキストを垂直方向に中央揃え */
+}
+
+.container ul{
+    display: flex;
+    justify-content: space-around; /* 要素間のスペースを均等に */
+    padding: 0;
+    margin: 0;
+    list-style-type: disc; /* デフォルトの黒点を設定 */
+}
+
+.container ul a{
+    text-decoration: none;
+    color: #000;
+}
+#title, #address {
+    margin: 10px 0; /* 上下に10pxのスペースを追加 */
+}
+
+/* ########### 599px以下(smartphone) ########### */
+@media (max-width: 599px) {
+}
+
+/* ########### 600px以上～768px以下(tablet) ########### */
+@media (min-width: 600px) and (max-width: 768px) {
+}
+
+/* ########### 769px以上(pc) ########### */
+@media (min-width: 769px) {
+}
+
+/* ########### 1000px以上(pc) ########### */
+@media (min-width: 1000px) {
+}
+
+
+@media (max-width: 768px) {
+    /* スマートフォンやタブレット用のスタイル */
+    header {
+        padding-top: 5%;
+    }
+
+    .allCategory ul li {
+        padding-left: 15px;
+    }
+
+    footer .info {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 599px) {
+    /* スマートフォン用のスタイル */
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .allCategory ul li {
+        padding-left: 10px;
+    }
+
+    footer .info {
+        padding: 5px;
+    }
+}

@@ -1,0 +1,357 @@
+@charset "utf-8";
+
+
+
+/* バナー画像のスタイル */
+.banner {
+    width: 100%; /* 親要素の幅に合わせる */
+    height: 150px; /* バナーの高さを固定 */
+    overflow: hidden; /* はみ出た部分を隠す */
+}
+
+.banner-image {
+    object-fit: cover; /* 画像を親要素にフィットさせる */
+}
+
+
+div.main {
+    background-color: #FFECEB;
+    width: calc(100% - 10vw); /* 左右100pxずつのスペースを確保 */
+    margin: 0 auto; /* コンテンツを中央揃え */
+
+}
+
+
+footer {
+    background-color: #666C76;
+    text-align: center;
+    padding: 10px 0; /* 上下にパディングを追加してスペースを確保 */
+    box-sizing: border-box;
+    position: relative;
+}
+
+footer .top-bar {
+    height: 10px;
+    background-color: #E39E9E; /* 変更したい色を指定 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+div.info {
+    background-color: #D9D9D9;
+    padding: 20px; /* 全体にパディングを追加してスペースを確保 */
+    margin-bottom: 10px; /* 下部にスペースを追加 */
+}
+
+div.copyright {
+    background-color: #666C76;
+    color: white;
+    height: 40px; /* フッター内の内容の高さを調整 */
+    display: flex;
+    justify-content: center; /* テキストを中央揃え */
+    align-items: center; /* テキストを垂直方向に中央揃え */
+}
+
+.container ul {
+    display: flex;
+    justify-content: space-around; /* 要素間のスペースを均等に */
+    padding: 0;
+    margin: 0;
+    list-style-type: disc; /* デフォルトの黒点を設定 */
+}
+
+.container ul a {
+    text-decoration: none;
+    color: #000;
+}
+
+#title, #address {
+    margin: 10px 0; /* 上下に10pxのスペースを追加 */
+}
+
+
+/*!*.header {*!*/
+/*!*  background-color: #fff;*!*/
+/*!*  padding: 10px 20px;*!*/
+/*!*  border-bottom: 1px solid #ccc;*!*/
+/*!*}*!*/
+
+/*.header .logo {*/
+/*  font-size: 1.5em;*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*.main {*/
+/*  max-width: 1200px;*/
+/*  margin: 0 auto;*/
+/*  background-color: #fff;*/
+/*  padding: 20px;*/
+/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-info {
+    font-size: 1.2em;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 1行に5個配置 */
+    gap: 10px; /* 各アイテムの間隔 */
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    background-color: #E39E9E;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.menu-item:hover {
+    transform: scale(1.05);
+}
+
+.menu-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+}
+
+
+.notifications, .calendar-section {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.notifications table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.notifications th, .notifications td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar div {
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+span{
+    margin: 0 0 0 20px;
+}
+
+.mymenu{
+    font-size: 1.2rem;
+    margin: 0 0 50px 450px;
+    border-bottom:solid 2px #000;
+    display: inline-block;
+    
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 3列 */
+    gap: 50px; /* 画像間のスペース */
+    margin: 0 0 0 70px;
+    width: 760px;
+}
+
+.title_main2{
+    padding: 20px 0 20px 70px;
+}
+
+.grid-item img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover; /* 画像全体を収める */
+    background-color: #050505; /* 背景色を追加（必要なら） */
+}
+
+.name_price{
+    background-color: #cfcfcf;
+    width: 150px;
+}
+
+.product_img{
+    width: 20px;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(50%); /* 画像を暗くする（薄く見える） */
+}
+
+.name_price{
+    background-color: #cfcfcf;
+    width: 150px;
+}
+
+.p_name{
+    padding: 5px 0 0 8px;
+}
+
+#s_price{
+    padding: 5px 8px 0 5px;
+    background-color: #fff;
+    display: inline-block;
+    margin: 5px 0 10px 8px;
+    color: red;
+}
+
+.product_img2{
+    width: 200px;
+    height: 200px;
+}
+
+.overlay {
+    position: relative;
+    color: red;
+    top: -105px;
+    left: 15px;
+    transform: rotate(30deg);
+    font-size: 1.3rem;
+    pointer-events: none;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+}
+
+.pro_image{
+    margin: 20px 0 0 0;
+    clip-path: circle(50% at center);
+}
+
+button {
+    position: absolute;
+    top: 400px;
+    right: 250px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 0.633vh;
+    font-size: 1.772vh;
+    cursor: pointer;
+}
+
+.follow-btn {
+    background-color:blue;
+    color: white;
+}
+
+#search-icon {
+    height: 40px; /* 検索ボックスと同じ高さに調整 */
+    width: 40px; /* 任意の幅に調整 */
+    position: relative;
+    top: -13px;
+    left:-20px;
+    z-index: 0;
+}
+.modal-content{
+    background: #ffffff;
+    text-align: left;
+    line-height: 1.8;
+    padding: 20px;
+  }
+  .modal-text{
+    border: #000 solid 1px;
+    width: 400px;
+  }
+      /* モーダルと背景の指定 */
+      .modal{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background: rgba(0,0,0,50%);
+        padding: 40px 20px;
+        overflow: auto;
+        opacity: 0;
+        visibility: hidden;
+        transition: .3s;
+        box-sizing: border-box;
+      }
+      
+      /* モーダルの擬似要素の指定 */
+      .modal:before{
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        margin-left: -0.2em;
+      }
+      
+      /* クラスが追加された時の指定 */
+      .modal.is-active{
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      /* モーダル内側の指定 */
+      .modal-container{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 600px;
+        width: 90%;
+      }
+      
+      /* モーダルを閉じるボタンの指定 */
+      .modal-close{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -20px;
+        right: -20px;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        background: #000;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+.follow{
+    cursor: pointer;
+}
+
+.follower{
+    cursor: pointer;
+}
+
+.ready:hover {
+    filter: brightness(70%);  /* 明るさを70%に設定して暗くする */
+}

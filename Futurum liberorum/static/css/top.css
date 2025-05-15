@@ -1,0 +1,263 @@
+@charset "utf-8";
+footer{
+    width:100%
+}
+.tentative-image {
+    position: relative; /* 相対位置を使用 */
+    display: inline-block; /* 画像を横に並べる */
+}
+
+.img1{
+    margin-left: 130px;
+}
+
+.img2 {
+    padding-top: 30px;
+    margin-left: 35px;
+}
+
+.img3 {
+    margin-left: 130px;
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img4 {
+    margin-left: 35px;
+}
+
+.img5 {
+    margin-left: 130px;
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img6 {
+    margin-left: 35px; /* 必要に応じて調整 */
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img7 {
+    margin-left: 130px;
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img8 {
+    margin-left: 72px; /* 必要に応じて調整 */
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img9 {
+    margin-left: 72px; /* 必要に応じて調整 */
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img10 {
+    margin-left: 130px;
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img11 {
+    margin-left: 80px; /* 必要に応じて調整 */
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img12 {
+    margin-left: 65px; /* 必要に応じて調整 */
+    margin-top: 50px;  /* 必要に応じて調整 */
+}
+
+.img13 {
+    margin-top: 65px;  /* 必要に応じて調整 */
+    margin-left: 130px;
+    margin-bottom: 50px;
+}
+
+
+
+#title, #address {
+    margin: 10px 0; /* 上下に10pxのスペースを追加 */
+}
+
+
+
+.topImg{
+    width: 100%;
+}
+
+.topNav{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+
+
+.image-text-wrapper {
+    position: relative;
+    display: inline-block; /* 親要素をインラインブロックにする */
+}
+
+.tag {
+    display: block; /* 画像をブロック表示 */
+    width: 100%; /* 必要に応じて調整 */
+}
+
+.overlay-text1 {
+    position: absolute;
+    top: 55%; /* 画像の上半分に文字を配置 */
+    left: 54%; /* 水平方向で中央に配置 */
+    transform: translate(-50%, -50%); /* 完全に中央揃えにする */
+    font-size: 12px;
+    color: black; /* 文字色を白に設定 */
+    font-weight: bold; /* フォントを太字にする */
+    pointer-events: none; /* 文字がクリックなどの操作に影響しないようにする */
+}
+.overlay-text2 {
+    position: absolute;
+    top: 55%; /* 画像の上半分に文字を配置 */
+    left: 54%; /* 水平方向で中央に配置 */
+    transform: translate(-50%, -50%); /* 完全に中央揃えにする */
+    font-size: 11px;
+    color: black; /* 文字色を白に設定 */
+    font-weight: bold; /* フォントを太字にする */
+    pointer-events: none; /* 文字がクリックなどの操作に影響しないようにする */
+}
+.overlay-text3 {
+    position: absolute;
+    top: 55%; /* 画像の上半分に文字を配置 */
+    left: 54%; /* 水平方向で中央に配置 */
+    transform: translate(-50%, -50%); /* 完全に中央揃えにする */
+    font-size: 15px;
+    color: black; /* 文字色を白に設定 */
+    font-weight: bold; /* フォントを太字にする */
+    pointer-events: none; /* 文字がクリックなどの操作に影響しないようにする */
+}
+
+
+
+
+
+.srid{
+    padding: 20px 10px;
+    background-color: #fbffa6;
+}
+
+.sridTable {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.sridImg {
+    width: 170px; /* 画像の幅を適宜調整 */
+    height: auto;
+}
+
+.sridY {
+    width: 50px; /* 画像の幅を適宜調整 */
+    height: auto;
+}
+
+#search-icon {
+    height: 5.05vh; /* 検索ボックスと同じ高さに調整 */
+    width: 5.05vh; /* 任意の幅に調整 */
+    position: relative;
+    top: -0.375vh;
+    left:-0.9vh;
+    z-index: 2;
+}
+
+#search-box {
+    padding: 1.26vh 1.26vh;
+    font-size: 2.02vh;
+    border: 0.12px solid #ccc;
+    width: 25.6vh;
+    text-align: center;
+    position: relative;
+    top: 3.79vh;
+    left: 45.9vh;
+}
+
+#footer_top{
+    background-color: #666C76;
+    text-align: center;
+    padding: 10px 0; /* 上下にパディングを追加してスペースを確保 */
+    box-sizing: border-box;
+    position: relative;
+    width: calc(100% - 0vh); /* 左右100pxずつのスペースを確保 */
+}
+
+
+
+/* ########### 599px以下(smartphone) ########### */
+@media (max-width: 599px) {
+}
+
+/* ########### 600px以上～768px以下(tablet) ########### */
+@media (min-width: 600px) and (max-width: 768px) {
+}
+
+/* ########### 769px以上(pc) ########### */
+@media (min-width: 769px) {
+}
+
+/* ########### 1000px以上(pc) ########### */
+@media (min-width: 1000px) {
+}
+
+
+@media (max-width: 768px) {
+    /* スマートフォンやタブレット用のスタイル */
+    header {
+        padding-top: 5%;
+    }
+
+    .allCategory ul li {
+        padding-left: 15px;
+    }
+
+    footer .info {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 599px) {
+    /* スマートフォン用のスタイル */
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .allCategory ul li {
+        padding-left: 10px;
+    }
+
+    footer .info {
+        padding: 5px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,236 @@
+ @charset "utf-8";
+ .mr-4.full-width {
+    width: 100%;
+    height: auto;
+    display: block; /* 余分な余白を消すためにblockに設定 */
+}
+
+main{
+    min-height: 1200px;
+}
+
+.hr_navi{
+    margin: 0 0 40px 0;
+}
+
+.text-container {
+    margin-left: 200px; /* 左右と下に余白を設定 */
+}
+
+hr {
+    width: 90%; /* 線の幅を調整 */
+    margin: 80px auto; /* 上下の余白と中央揃えのためのオートマージン */
+    border: 0; /* デフォルトの枠を無効化 */
+    border-top: 1px solid black; /* 上部に黒の1pxの線を設定 */
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3列 */
+    gap: 50px; /* 画像間のスペース */
+    margin: 0 0 0 50px;
+    width: 760px;
+}
+.grid-item img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover; /* 画像全体を収める */
+    background-color: #050505; /* 背景色を追加（必要なら） */
+}
+
+.name_price{
+    background-color: #cfcfcf;
+    width: 150px;
+}
+
+.p_name{
+    padding: 5px 0 0 8px;
+}
+
+#s_price{
+    padding: 5px 8px 0 5px;
+    background-color: #fff;
+    display: inline-block;
+    margin: 5px 0 10px 8px;
+    color: red;
+}
+
+.product_img{
+    width: 20px;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(50%); /* 画像を暗くする（薄く見える） */
+}
+
+.product_img2{
+    width: 200px;
+    height: 200px;
+}
+
+.overlay {
+    position: relative;
+    color: red;
+    top: -105px;
+    left: 15px;
+    transform: rotate(30deg);
+    font-size: 1.3rem;
+    pointer-events: none;
+}
+
+.filter-section {
+    width: 200px;
+    height: 1000px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin: 20px;
+    position: relative;
+    top:-310px;
+    right: -900px;
+}
+
+h3 {
+    font-size: 18px;
+    margin: 20px 0 20px 20px;
+}
+
+h4 {
+    font-size: 16px;
+    margin: 0 0 20px 20px;
+}
+
+.side_navi {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.side_navi li {
+    margin: 0 0 20px 35px;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFECEB;
+    padding: 0 0 30px 0;
+}
+
+.pagination a, .pagination span {
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #f4f4f4;
+}
+
+.pagination .prev, .pagination .next {
+    font-weight: bold;
+}
+
+.pagination .page-num {
+    background-color: #f9f9f9;
+}
+
+.pagination .dots {
+    padding: 10px;
+    color: #666;
+}
+
+/* Category specific styles */
+.filter-category, .filter-condition, .filter-price {
+    margin-bottom: 15px;
+}
+
+.filter-category li, .filter-condition li, .filter-price li {
+    font-size: 14px;
+}
+
+.midasi{
+    margin-left: 50px;
+}
+.title_main{
+    padding: 20px 0 20px 30px;
+}
+
+.title_main2{
+    padding: 20px 0 20px 50px;
+}
+
+.selected {
+    background-color: #ffd700;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+ footer{
+    width: calc(100% - 0vh); /* 左右100pxずつのスペースを確保 */
+}
+
+/* ########### 599px以下(smartphone) ########### */
+@media (max-width: 599px) {
+}
+
+/* ########### 600px以上～768px以下(tablet) ########### */
+@media (min-width: 600px) and (max-width: 768px) {
+}
+
+/* ########### 769px以上(pc) ########### */
+@media (min-width: 769px) {
+}
+
+/* ########### 1000px以上(pc) ########### */
+@media (min-width: 1000px) {
+}
+
+
+@media (max-width: 768px) {
+    /* スマートフォンやタブレット用のスタイル */
+    header {
+        padding-top: 5%;
+    }
+
+    .allCategory ul li {
+        padding-left: 15px;
+    }
+
+    footer .info {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 599px) {
+    /* スマートフォン用のスタイル */
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .allCategory ul li {
+        padding-left: 10px;
+    }
+
+    footer .info {
+        padding: 5px;
+    }
+}

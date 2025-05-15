@@ -1,0 +1,236 @@
+
+.search-button {
+    padding: 5px 10px;
+
+    font-size: 10px;
+    background-color: #ffffff; /* ボタンの背景色 */
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.search-button:hover {
+    background-color: #b8b8b8; /* ホバー時の色 */
+}
+
+
+
+.additional-text p {
+    font-size: 1rem; /* フォントサイズ */
+    color: #333; /* テキストカラー */
+}
+
+
+
+.allCategory ul li span {
+    text-decoration: underline; /* テキストに下線を追加 */
+    line-height: 1.5; /* テキストの行の高さを調整 */
+}
+
+
+
+
+h3 {
+    width: 75%;
+    position: relative;
+    top: 50px;
+    left: 9.5vh;
+    font-size: 1.5rem;
+}
+
+
+
+
+h4 {
+    width: 75%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #55B3C8; /* 背景色を指定 */
+    position: relative;
+    left: 10%;
+    text-align: left !important; /* 文字を左寄せにする */
+    padding: 5px 10px 5px 20px; /* 上下に10px、左右に20pxの内側の余白を追加 */
+    font-size: 1.5rem; /* フォントサイズを指定 */
+    text-align: center; /* テキストを中央揃え */
+}
+
+h5{
+    font-size: 1.5rem; /* フォントサイズを指定 */
+    text-align: center; /* テキストを中央揃え */
+}
+
+#hjimete{
+    text-align: center; /* テキストを中央揃え */
+    }
+
+.box_css1 {
+    width: 80%;
+    min-height: 250px; /* 高さを調整 */
+    margin: 1.5rem auto; /* 上下のマージンは5em、左右は自動で中央揃え */
+    border: solid 1px #ffffff;
+    background-color: #ffffff;
+    padding: 20px; /* コンテンツ周囲の余白を追加 */
+    box-sizing: border-box; /* パディングと枠を含めてボックスサイズを計算 */
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    justify-content: space-around; /* 均等に配置 */
+    gap: 20px; /* 子要素間のスペースを均等に設定 */
+}
+
+
+
+.box_css2 {
+    width: 80%;
+    min-height: 250px; /* 高さを調整 */
+    margin: 1.5rem auto; /* 上下のマージンは5em、左右は自動で中央揃え */
+    border: solid 1px #ffffff;
+    background-color: #ffffff;
+    padding: 20px; /* コンテンツ周囲の余白を追加 */
+    box-sizing: border-box; /* パディングと枠を含めてボックスサイズを計算 */
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    justify-content: space-around;
+    gap: 20px; /* 子要素間のスペースを均等に設定 */
+}
+
+
+
+
+.naiyou-container {
+    display: flex; /* Flexboxで子要素を横並びにする */
+    justify-content: space-between; /* 要素間のスペースを調整 */
+    gap: 10px; /* 任意で要素間のスペースを設定 */
+
+}
+
+
+
+#naiyou1, #naiyou2 {
+    width: 48%; /* 2つの要素が均等に並ぶように幅を調整 */
+    position: relative; /* 相対位置を設定して子要素の絶対位置を基準にする */
+}
+
+
+
+
+.input-field {
+    width: calc(100% - 20px); /* 横幅を調整 (パディングの分を引く) */
+    padding: 10px; /* テキストボックス内のパディングを指定 */
+    margin: 0 0 2vh 0;
+    border: 1px solid #ccc; /* 枠線を指定 */
+    border-radius: 5px; /* 角を丸くする */
+    box-sizing: border-box; /* パディングと枠を含めてボックスサイズを計算 */
+}
+
+
+
+.submit-button {
+    width: calc(100% - 20px); /* テキストボックスと同じ横幅に調整 */
+    padding: 10px; /* テキストボックスと同じ内側の余白 */
+    border: 1px solid #ccc; /* 枠線を指定 */
+    border-radius: 5px; /* 角を丸くする */
+    background-color: #55B3C8; /* ボタンの背景色 */
+    color: white; /* ボタンの文字色 */
+    font-size: 1rem; /* ボタンの文字サイズ */
+    cursor: pointer; /* ポインタカーソルを表示 */
+    box-sizing: border-box; /* パディングと枠を含めてボックスサイズを計算 */
+    text-align: center; /* ボタン内のテキストを中央揃え */
+}
+
+
+
+.submit-button:hover {
+    background-color: #4a9cbb; /* ホバー時の背景色を変更 */
+}
+
+
+
+.resign-button {
+    width: calc(100% - 20px); /* テキストボックスと同じ横幅に調整 */
+    padding: 10px; /* テキストボックスと同じ内側の余白 */
+    border: 1px solid #ccc; /* 枠線を指定 */
+    border-radius: 5px; /* 角を丸くする */
+    background-color: #E85A47; /* ボタンの背景色 */
+    color: white; /* ボタンの文字色 */
+    font-size: 1rem; /* ボタンの文字サイズ */
+    cursor: pointer; /* ポインタカーソルを表示 */
+    box-sizing: border-box; /* パディングと枠を含めてボックスサイズを計算 */
+    text-align: center; /* ボタン内のテキストを中央揃え */
+    display: inline-block;
+}
+
+
+
+.resign-button:hover {
+    background-color: #f83920; /* ホバー時の背景色を変更 */
+}
+
+
+
+.box_css p {
+    text-align: center;
+}
+
+
+
+.input-field {
+    text-align: center; /* テキストを中央揃え */
+}
+
+
+
+
+
+
+hr {
+    width: 90%; /* 線の幅を調整 */
+    margin: 80px auto; /* 上下の余白と中央揃えのためのオートマージン */
+    margin-bottom: 40px;
+    border: 0; /* デフォルトの枠を無効化 */
+    border-top: 1px solid black; /* 上部に黒の1pxの線を設定 */
+}
+
+
+
+footer .top-bar {
+    height: 10px;
+    background-color: #E39E9E; /* 変更したい色を指定 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.register{
+    color: #000;
+    text-decoration: none;
+    display: block;
+}
+
+footer{
+    width: calc(100% - 0vh); /* 左右100pxずつのスペースを確保 */
+}
+
+/* ########### 599px以下(smartphone) ########### */
+@media (max-width: 599px) {
+}
+
+
+
+/* ########### 600px以上～768px以下(tablet) ########### */
+@media (min-width: 600px) and (max-width: 768px) {
+}
+
+
+
+/* ########### 769px以上(pc) ########### */
+@media (min-width: 769px) {
+}
+
+
+
+/* ########### 1000px以上(pc) ########### */
+@media (min-width: 1000px) {
+}

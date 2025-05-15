@@ -1,0 +1,117 @@
+@charset "utf-8";
+#search-icon {
+    height: 40px; /* 検索ボックスと同じ高さに調整 */
+    width: 40px; /* 任意の幅に調整 */
+    position: relative;
+    top: -3px;
+    left:-7px;
+    z-index: 2;
+}
+
+
+#search-box {
+    padding: 10px 10px;
+    font-size: 16px;
+    border: 0.12px solid #ccc;
+    width: 222px;
+    text-align: center;
+    position: relative;
+    top: 27px;
+    left: 363px;
+}
+
+
+#post-title {
+    width: 80ch; /* 40文字分の幅 */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea {
+    resize: none; /* ユーザーによるサイズ変更を無効にする */
+}
+
+.container_main {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ファイルアップロードアイコンのスタイル */
+label.file-upload-label {
+    display: block;
+    width: 100px;  /* 最大幅 */
+    height: 100px; /* 最大高さ */
+    margin: 20px 0 40px 20px;
+    background-color: #f4f4f9; /* 背景色で枠を設定 */
+    display: flex;  /* フレックスで中央配置 */
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    overflow: hidden; /* 枠外にはみ出さないように */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+label.file-upload-label:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 画像のスタイル */
+label.file-upload-label img {
+    width: 100%;    /* 幅を100%に設定して枠に合わせる */
+    height: 100%;   /* 高さを100%に設定して枠に合わせる */
+    object-fit: contain;  /* 画像が枠内に収まるように、比率を保ちながら調整 */
+}
+/* 隠しファイル入力 */
+input[type="file"] {
+    display: none;
+}
+
+.container_img {
+    display: flex;
+    justify-content: flex-start; /* 左に寄せる */
+    gap: 180px; /* 子要素同士の間に均等な間隔 */
+}
+
+#img1{
+    padding: 0 0 0 60px;
+}
+
+.submit-btn {
+    display: block;  /* ブロック要素にする */
+    margin-left: auto; /* 左側の余白を自動調整し、右端へ寄せる */
+    margin-right: 20px; /* 右端から20px */
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
