@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Futurum liberorum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/display_form.css') }}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon" class="icon">
+                    <div class="title-container">
+                        <h1>Futurum liberorum</h1>
+                        <img src="{{ url_for('static', filename='images/circle_01.png') }}" class="circle1" alt="Circle">
+                        <img src="{{ url_for('static', filename='images/circle_02.png') }}" class="circle2" alt="Circle">
+                        <h2 class="subtitle">すべての子育て世帯のための総合支援サービス</h2>
+                    </div>
+                    <div class="allSearch">
+                        <form action="/search_icon" method="GET" class="search-form">
+                            <button type="submit">
+                                <img src="{{ url_for('static', filename='images/Search.png') }}" alt="検索アイコン" class="search-icon">
+                            </button>
+                            <input type="text" name="search_box" placeholder="何をお探しですか？" class="search-box">
+                            <p class="guest_text">ようこそ!<br>                        
+                            {% for data in aryData %}
+                                {{ data[1] }}
+                            {% endfor %}様</p>
+                        </form>
+                    </div>
+                    <div class="additional-text">
+                        <p>すくすくポイント：                    
+                        {{ point }}
+                        Pt　/　ヘルプ　/　文字サイズ 大・中・小</p>
+                    </div>
+
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='images/notice.png') }}" alt="Icon 1" class="icon2">
+                        {% for data in aryData %}
+                            <a href ="/profile?searchId={{data[0]}}">
+                                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Icon 2" class="icon2">
+                            </a>
+                        {%endfor%}
+                            <img src="{{ url_for('static', filename='images/favorite.png') }}" alt="Icon 3" class="icon2">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='images/login.png') }}" alt="Icon 4" class="icon2">
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <nav class="all">
+                <nav class="result">ホーム　≫　出品編集</nav>
+                <nav class="category">
+                    <div class="allCategory">
+                        <ul>
+                            <li><a href="/top">トップページ</a></li>
+                            <li>お知らせ</li>
+                            <li>Futurum liberorumとは</li>
+                            <li><a href="/search">商品を探す</a></li>
+                            <li><a href="/display_form">商品を出品する</a></li>
+                            <li><a href="/search_rental">レンタル品を探す</li>
+                            <li><a href="/display_form_rental">レンタルに出す</a></li>
+                            <li><a href="/post_search">育児日記</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+
+        <main>
+            {% for data in datas %}
+                <form action="/edit_sale" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="saleId" value="{{data.saleId}}" hidden>
+                    <div class="section-title">商品の情報を入力</div>
+                    <div class="section-subtitle">商品画像の選択</div>
+                    <div class="container_img">
+                        {% if "photo1" in data  %}
+                            <div id="img1" class="image-upload-container" disable>
+                                <div class="image-upload">
+                                    <label for="file-upload-1" class="file-upload-label">
+                                        <img src="{{data.photo1}}" alt="ファイル選択"
+                                            class="file-upload-icon-1">
+                                    </label>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div id="img1" class="image-upload-container">
+                                <div class="image-upload">
+                                    <label for="file-upload-1" class="file-upload-label">
+                                        <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                            class="file-upload-icon-1">
+                                    </label>
+                                    <input type="file" id="file-upload-1" name="upload1" accept="image/*" multiple>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if "photo2" in data  %}
+                            <div id="img2" class="image-upload-container" style="display: none;">
+                                <div class="image-upload">
+                                    <label for="file-upload-2" class="file-upload-label">
+                                        <img src="{{ data.photo2 }}" alt="ファイル選択"
+                                            class="file-upload-icon-2">
+                                    </label>
+                                </div>
+                            </div>
+                        {%else%}
+                            <div id="img2" class="image-upload-container" style="display: none;">
+                                <div class="image-upload">
+                                    <label for="file-upload-2" class="file-upload-label">
+                                        <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                            class="file-upload-icon-2">
+                                    </label>
+                                </div>
+                            </div>
+                        {%endif%}
+                        {% if "photo3" in data  %}
+                            <div id="img3" class="image-upload-container" style="display: none;">
+                                <div class="image-upload">
+                                    <label for="file-upload-3" class="file-upload-label">
+                                        <img src="{{data.photo3}}" alt="ファイル選択"
+                                            class="file-upload-icon-3">
+                                    </label>
+                                </div>
+                            </div>
+                        {%else%}
+                            <div id="img3" class="image-upload-container" style="display: none;">
+                                <div class="image-upload">
+                                    <label for="file-upload-3" class="file-upload-label">
+                                        <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                            class="file-upload-icon-3">
+                                    </label>
+                                </div>
+                            </div>
+                        {%endif%}
+                        {% if "photo4" in data  %}
+                            <div id="img4" class="image-upload-container" style="display: none;">
+                                <div class="image-upload">
+                                    <label for="file-upload-4" class="file-upload-label">
+                                        <img src="{{data.photo4}}" alt="ファイル選択"
+                                            class="file-upload-icon-4">
+                                    </label>
+                                </div>
+                            </div>
+                        {%else%}
+                            <div id="img4" class="image-upload-container" style="display: none;">
+                                <div class="image-upload">
+                                    <label for="file-upload-4" class="file-upload-label">
+                                        <img src="{{ url_for('static', filename='images/purasu.png') }}" alt="ファイル選択"
+                                            class="file-upload-icon-4">
+                                    </label>
+                                </div>
+                            </div>
+                        {%endif%}
+                    </div>
+                    <div class="section-subtitle">商品情報</div>
+                    <div class="container_main">
+                        <div class="product-info">
+                            <label for="product-name">商品名</label>
+                            <input type="text" id="product-name" name="productName" value="{{data.productName}}" maxlength="40" placeholder="必須（40文字まで）"
+                                required>
+
+                            <label for="sellingPrice">販売価格</label>
+                            <input type="text" id="sellingPrice" value="{{data.sellingPrice}}" maxlength="10" name="sellingPrice"
+                                placeholder="¥ 300～9,999,999" required></textarea>
+
+                            <label for="category">カテゴリー</label>
+                            <select id="category" name="categoryId" required>
+                                <option value="{{ data.categoryId }}">{{ data.category }}</option>
+                                <option value="00001">子供服</option>
+                            </select>
+
+                            <label for="condition">商品の状態</label>
+                            <select id="condition" name="productCondition" required>
+                                <option value="{{data.productStatus}}">{{data.productStatus}}</option>
+                                <option value="新品、未使用">新品、未使用</option>
+                                <option value="未使用に近い">未使用に近い</option>
+                                <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
+                                <option value="やや傷や汚れあり">やや傷や汚れあり</option>
+                                <option value="傷や汚れあり">傷や汚れあり</option>
+                                <option value="全体的に状態が悪い">全体的に状態が悪い</option>
+                            </select>
+                        </div>
+                    </div>
+                    <label for="explanation" id="product-explanation">商品説明</label>
+                    <textarea id="explanation" name="productDescription">{{data.productExp}}</textarea>
+                    <p class="shipping">発送について</p>
+                    <div class="container_shipping">
+                        <div class="product-info">
+                            <label for="shippingPayer">配送料の負担</label>
+                            <select id="shippingPayer" name="shippingPayer" required>
+                                <option value="{{data.shippingPayer}}">{{data.shippingPayer}}</option>
+                                <option value="送料込み(出品者負担)">送料込み(出品者負担)</option>
+                                <option value="着払い(購入者負担)">着払い(購入者負担)</option>
+                            </select>
+
+                            <label for="shippingEstimate">発送までの日数</label>
+                            <select id="shippingEstimate" name="shippingEstimate" required>
+                                <option value="{{data.shippingEstimate}}">{{data.shippingEstimate}}</option>
+                                <option value="1～2日で発送">1～2日で発送</option>
+                                <option value="3～4日で発送">3～4日で発送</option>
+                                <option value="5～7日で発送">5～7日で発送</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="submit-btn">編集完了</button>
+                    </div>
+                </form>
+            {% endfor %}
+        </main>
+
+        <div class="container">
+            <footer>
+                <div class="top-bar"></div>
+                <div class="info">
+                    <p id="title">Futurum liberorum　すべての子育て世帯のための総合支援サービス</p><br>
+                    <p id="address">〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタワーズ <br>
+                        IH22　第3グループ　TEL：052-551-1001（ダイヤルイン）</p>
+                    <div>
+                        <ul>
+                            <li>利用規約</li>
+                            <li>個人情報保護方針</li>
+                            <li>情報セキュリティ方針</li>
+                            <li>よくある質問</li>
+                            <li>お問い合わせ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    copyright &copy;
+                    <script>
+                        var hiduke = new Date();
+                        document.write(hiduke.getFullYear());
+                    </script>
+                    公益社団法人：全国子ども未来支援協会.All right reserved.
+                </div>
+            </footer>
+        </div>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let photoCount = Number("{{ photo_count }}"); // Pythonの変数をJSに渡す
+        
+                if (photoCount === 2) {
+                    document.getElementById('img2').style.display = 'block'; // img2を表示
+                    // ここで特定の処理を追加
+                }
+                if (photoCount === 3) {
+                    document.getElementById('img2').style.display = 'block'; // img2を表示
+                    document.getElementById('img3').style.display = 'block'; // img3を表示
+                    // ここで特定の処理を追加
+                }
+                if (photoCount === 4) {
+                    document.getElementById('img2').style.display = 'block'; // img2を表示
+                    document.getElementById('img3').style.display = 'block'; // img3を表示
+                    document.getElementById('img4').style.display = 'block'; // img4を表示
+                    // ここで特定の処理を追加
+                }
+            });
+            document.addEventListener("DOMContentLoaded", () => {
+                const sellingPriceInput = document.getElementById("sellingPrice");
+            
+                sellingPriceInput.addEventListener("input", (e) => {
+                    // 入力値を取得し、¥を取り除く
+                    let value = e.target.value.replace(/[^0-9]/g, "");
+                
+                    // 7桁までに制限
+                    value = value.slice(0, 7);
+                
+                    // 適切な位置にコンマを挿入
+                    const formattedValue = Number(value).toLocaleString();
+                
+                    // ¥を先頭に付ける
+                    e.target.value = value ? `¥ ${formattedValue}` : "";
+                });
+            
+                // フォーカス時にカーソル位置を調整
+                sellingPriceInput.addEventListener("focus", (e) => {
+                    // ¥を除いた後にフォーカスする位置を計算
+                    e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+                });
+            });
+        
+        
+            // 画像を選択したときにプレビューする
+            document.getElementById("file-upload-1").addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const icon = document.querySelector(".file-upload-icon-1");
+                        icon.src = e.target.result; // 選択された画像に置き換える
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        
+            // 画像を選択したときにプレビューする
+            document.getElementById("file-upload-2").addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const icon = document.querySelector(".file-upload-icon-2");
+                        icon.src = e.target.result; // 選択された画像に置き換える
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        
+            // 画像を選択したときにプレビューする
+            document.getElementById("file-upload-3").addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const icon = document.querySelector(".file-upload-icon-3");
+                        icon.src = e.target.result; // 選択された画像に置き換える
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        
+            // 画像を選択したときにプレビューする
+            document.getElementById("file-upload-4").addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const icon = document.querySelector(".file-upload-icon-4");
+                        icon.src = e.target.result; // 選択された画像に置き換える
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        
+            document.getElementById('file-upload-1').addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    document.getElementById('img2').style.display = 'block'; // img2を表示
+                }
+            });
+            
+            document.getElementById('file-upload-2').addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    document.getElementById('img3').style.display = 'block'; // img3を表示
+                }
+            });
+            
+            document.getElementById('file-upload-3').addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    document.getElementById('img4').style.display = 'block'; // img4を表示
+                }
+            });
+        
+        
+            
+        </script>
+    </div>
+</body>
+
+</html>

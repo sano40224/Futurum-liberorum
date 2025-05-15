@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Futurum liberorum</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/productDetails.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <img src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon" class="icon">
+                    <div class="title-container">
+                        <h1>Futurum liberorum</h1>
+                        <img src="{{ url_for('static', filename='images/circle_01.png') }}" class="circle1" alt="Circle">
+                        <img src="{{ url_for('static', filename='images/circle_02.png') }}" class="circle2" alt="Circle">
+                        <h2 class="subtitle">すべての子育て世帯のための総合支援サービス</h2>
+                    </div>
+                    <div class="allSearch">
+                        <form action="/search_icon" method="GET" class="search-form">
+                            <button type="submit">
+                                <img src="{{ url_for('static', filename='images/Search.png') }}" alt="検索アイコン" class="search-icon">
+                            </button>
+                            <input type="text" name="search_box" placeholder="何をお探しですか？" class="search-box">
+                            <p class="guest_text">ようこそ!<br>                        
+                            {% for data in aryData %}
+                                {{ data[1] }}
+                            {% endfor %}様</p>
+                        </form>
+                    </div>
+                    <div class="additional-text">
+                        <p>すくすくポイント：                    
+                        {{ point }}
+                        Pt　/　ヘルプ　/　文字サイズ 大・中・小</p>
+                    </div>
+
+                    <div class="icon-container">
+                        <img src="{{ url_for('static', filename='images/notice.png') }}" alt="Icon 1" class="icon2">
+                        {% for data in aryData %}
+                            <a href ="/profile?searchId={{data[0]}}">
+                                <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Icon 2" class="icon2">
+                            </a>
+                        {%endfor%}
+                            <img src="{{ url_for('static', filename='images/favorite.png') }}" alt="Icon 3" class="icon2">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='images/login.png') }}" alt="Icon 4" class="icon2">
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <nav class="all">
+                <nav class="result">ホーム　≫　レンタル詳細</nav>
+                <nav class="category">
+                    <div class="allCategory">
+                        <ul>
+                            <li><a href="/top">トップページ</a></li>
+                            <li>お知らせ</li>
+                            <li>Futurum liberorumとは</li>
+                            <li><a href="/search">商品を探す</a></li>
+                            <li><a href="/display_form">商品を出品する</a></li>
+                            <li><a href="/search_rental">レンタル品を探す</li>
+                            <li><a href="/display_form_rental">レンタルに出す</a></li>
+                            <li><a href="/post_search">育児日記</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+            <main>
+                {% for data1 in aryData %}
+                {% for data in datas %}
+                <div class="product-details">
+                    <div class=left-countent>
+                        {% for photo in data.photoList %}
+                            <div class="grid-item">
+                                <img src="{{ photo }}" alt="商品画像" id="product_image{{ loop.index }}" onclick="swapImage(this)">
+                            </div>
+                        {% endfor %}
+
+                        <h3 class="comment_num">コメント({{comment_count}})</h3>
+                        <div class="comments">
+                            <div id="commentsSection">
+                                <div id="comments_text">
+
+                                    {% if comments or data_comment %}
+                                        {% for data_comment in comments %}
+                                            <p class="user_name">{{ data_comment.accountName }}</p> 
+                                            <p class="comment_text">{{ data_comment.comment }}</p>
+                                        {% endfor %}
+                                        {% else %}
+                                            <p>コメントがありません。</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="saler">
+                        <h3 class="saler_txt">出品者情報</h3>
+                        {% if data_saler %}
+                            <a href ="/profile?searchId={{data_saler.accountId}}"><table class="saler-exp">
+                                <th>
+                                    <img src="{{data_saler.icon}}" alt="ユーザーアイコン" class="saler-icon" width="70px">
+                                </th>
+                                <th>
+                                    <p class="saler-name">{{data_saler.accountName}}</p>
+                                </th>
+                            </table></a>
+                        {% endif %}
+                    </div>
+
+                    <div class="image-title-container">
+                        <div class="product-info">
+                            <h1 class="image-title">{{data.productName}}</h1>
+                            <h2 class="image-info">￥{{data.rentalPrice}}　(税込)</h2>
+                            <div class="left-buttons" >
+                                {% if data.accountId == data1[0]  %}
+                                    <button type="submit" class="modal-open button unBuy-now" disable>今すぐ買う</button>
+                                    <a href="/edit_form_rental?searchId={{ data.rentalId }}"><button type="submit" class="modal-open button edit">編集する</button></a>
+                                    <form action="/delete_rental" method="POST">
+                                        <input type="text" name="rentalId" value="{{data.rentalId}}" hidden>
+                                        <button type="submit" class="modal-open button delete">削除する</button>
+                                    </form>
+                                {% else %}
+                                    {% if data.accountId == data1[0]  %}
+                                        <button type="submit" class="modal-open button buy-now" disable>今すぐ買う</button>
+                                    {% else %}
+                                        <p hidden>{{ data.accountId }}</p>
+                                        {% if data.listingStatus == "購入済み" %}
+                                            <button type="submit" class="modal-open button buy-now" disable>SOLD OUT</button>
+                                        {% else %}
+                                            <button type="submit" class="modal-open button buy-now" data-target="modal1">今すぐ買う</button>
+                                        {% with messages = get_flashed_messages(with_categories=true) %}
+                                            {% if messages %}
+                                                {% for category, message in messages %}
+                                                    {% if category == 'error' %}
+                                                        <p class="error-message">{{ message }}</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                            <div id="modal1" class="modal js-modal">
+                                                <div class="modal-container">
+                                                  <!-- モーダルを閉じるボタン -->
+                                                  <div class="modal-close js-modal-close">×</div>
+                                                  <!-- モーダル内部のコンテンツ -->
+                                                  <div class="modal-content">
+                                                    <form action="/product_rental" method = "POST">
+                                                        <div class="window">
+                                                            <div class="payMethod-info">
+                                                                <input type="text" name="rentalId" value="{{data.rentalId}}" hidden>
+                                                                {% for data in aryData %}
+                                                                    <input type="text" name="account_id" value="{{data[0]}}" hidden>
+                                                                {%endfor%}
+                                                                <input type="text" name="searchId" value="{{data.rentalId}}" hidden>
+                                                                <input type="text" name="sellingPrice" id="sellingPrice" value="{{data.rentalPrice}}" hidden>
+                                                                <p>支払い方法を選択してください</p>
+                                                                <select name="payMethod" class="payMethod" id="payMethod">
+                                                                    <option value="クレジットカード">クレジットカード</option>
+                                                                    <option value="ポイント">ポイント</option>
+                                                                </select>
+                                                            
+                                                                <div id="creditCardInfo" class="credit-card-info">
+                                                                    <label for="cardNumber">カード番号：</label>
+                                                                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" oninput="formatDateInput2()" required><br>
+                                                                
+                                                                    <label for="expiry">有効期限　：</label>
+                                                                    <input type="text" id="expiry" placeholder="MM/YY" pattern="\d{2}/\d{2}" oninput="formatDateInput()" required><br>
+                                                                
+                                                                    <label for="securityCode">暗証番号　：</label>
+                                                                    <input type="password" id="securityCode" placeholder="•••" required><br>
+                                                                </div>
+                                                                {% for data in aryData %}
+                                                                    <input type="text" name="point" id="point" value="{{ data[3] }}" hidden>
+                                                                {% endfor %}
+                                                            </div>
+                                                                <button type="submit" id="modal-payMethod">購入</button>
+                                                        </div>
+                                                    </form>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="image-grid">
+                                <img src="{{ url_for('static', filename='images/favorite2.png') }}" alt="画像1" class="grid-image">
+                                <a class="modal-open comment_in" data-target="modal2">
+                                    <img src="{{ url_for('static', filename='images/comment.png') }}" alt="画像2" class="grid-image">
+                                </a>
+                                    <!-- モーダル本体 -->
+                                    <div id="modal2" class="modal js-modal">
+                                        <div class="modal-container">
+                                          <!-- モーダルを閉じるボタン -->
+                                          <div class="modal-close js-modal-close">×</div>
+                                          <!-- モーダル内部のコンテンツ -->
+                                          <div class="modal-content">
+                                            <form action="/comment_rental" method = "POST">
+                                                <div>
+                                                    <input type="text" name="rentalId" value="{{data.rentalId}}" hidden>
+                                                    {% for data in aryData %}
+                                                        <input type="text" name="account_id" value="{{data[0]}}" hidden>
+                                                    {%endfor%}
+                                                    <input type="text" name="searchId" value="{{data.rentalId}}" hidden>
+                                                    <p>コメントを入力してください</p>
+                                                    <input type="text" class="modal-text" name="comment" required>
+                                                    <a href="/search_id_rental?searchId={{ data.rentalId }}"><button type="submit" class="button modal-comment">送信</button></a>
+                                                </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                    </div>
+                                <img src="{{ url_for('static', filename='images/share.png') }}" alt="画像3" class="grid-image">
+                                <img src="{{ url_for('static', filename='images/report.png') }}" alt="画像4" class="grid-image">
+                            </div>
+                            <div class="product-description">
+                                <h2>商品の説明</h2>
+                                <p>{{data.productExp}}</p>
+                            </div>
+                            <div class="product-info-line">
+                                <p><strong>カテゴリー:</strong> {{data.category}}</p>
+                                <p><strong>商品の状態:</strong> {{data.productStatus}}</p>
+                                <p><strong>配送料:</strong> {{data.shippingPayer}}</p>
+                                <p><strong>発送期間:</strong> {{data.shippingEstimate}}</p>
+                                <p><strong>レンタル期間:</strong> {{data.rentalPeriod}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endfor %}
+            </main>
+
+            <div class="container">
+                <footer>
+                    <div class="top-bar"></div>
+                    <div class="info">
+                        <p id="title">Futuris liberis　すべての子育て世帯のための総合支援サービス</p><br>
+                        <p id="address">〒450-0002 愛知県名古屋市中村区名駅４丁目２７−１ 総合校舎スパイラルタワーズ <br>
+                            IH22　第3グループ　TEL：052-551-1001（ダイヤルイン）</p>
+                        <div>
+                            <ul>
+                                <li>利用規約</li>
+                                <li>個人情報保護方針</li>
+                                <li>情報セキュリティ方針</li>
+                                <li>よくある質問</li>
+                                <li>お問い合わせ</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="copyright">
+                        copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script>
+                        公益社団法人：全国子ども未来支援協会.All right reserved.
+                    </div>
+                </footer>
+            </div>
+
+        <script>
+            // モーダルの開閉処理
+            document.querySelectorAll('.modal-open').forEach(button => {
+                button.addEventListener('click', function() {
+                    const modalId = this.getAttribute('data-target');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.classList.add('is-active');
+                    }
+                });
+            });
+        
+            document.querySelectorAll('.js-modal-close').forEach(closeButton => {
+                closeButton.addEventListener('click', function() {
+                    this.closest('.js-modal').classList.remove('is-active');
+                });
+            });
+        
+            document.querySelectorAll('.js-modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('is-active');
+                    }
+                });
+            });
+            // 支払い方法の選択処理
+            const payMethodSelect = document.getElementById("payMethod");
+            const point = document.getElementById("point");
+            const sellingPrice = document.getElementById("sellingPrice");
+            const creditCardInputs = document.querySelectorAll('#cardNumber, #expiry, #securityCode');
+
+
+            function toggleCreditCardInputs(enable) {
+                creditCardInputs.forEach(input => {
+                    input.disabled = !enable;
+                    if (!enable) input.value = ""; // 無効化時に値をクリア
+                });
+            }
+
+            if (payMethodSelect) {
+                payMethodSelect.addEventListener("change", function() {
+                    const pointValue = parseFloat(point.textContent) || 0; // ポイントが無効な場合は 0 として処理
+                    const sellingPriceValue = parseFloat(sellingPrice.value) || 0; // 同様に販売価格を数値に変換
+
+                    if (this.value === "クレジットカード") {
+                        creditCardInfo.style.display = "block";
+                        toggleCreditCardInputs(true);
+                    } else {
+                        creditCardInfo.style.display = "none";
+                        toggleCreditCardInputs(false);
+                        if (sellingPrice > point) {
+                            alert("ポイントが不足しています。");
+                            this.value = "クレジットカード"; // クレジットカードに戻す
+                            creditCardInfo.style.display = "block";
+                            toggleCreditCardInputs(true);
+                        }
+                    }
+                });
+                // 初期状態の設定
+                toggleCreditCardInputs(payMethodSelect.value === "クレジットカード");
+            }
+            // 商品画像の切り替え
+            function swapImage(thumbnail) {
+                let mainImage = document.getElementById("product_image1");
+                let tempSrc = mainImage.src;
+                mainImage.src = thumbnail.src;
+                thumbnail.src = tempSrc;
+            }
+             // クレジットカード有効期限入力のフォーマット
+            function formatDateInput() {
+                const input = document.getElementById('expiry');
+                let value = input.value.replace(/[^0-9]/g, ''); // 数字以外を除去
+    
+                // 最大8文字に制限（MMDD形式）
+                if (value.length > 4) {
+                    value = value.substring(0, 4);
+                }
+    
+                // 入力の長さに応じて「/」を挿入
+                value = value.replace(/^(\d{2})(\d{0,2})$/, '$1/$2');
+    
+                input.value = value; // 入力フィールドに再設定
+            }
+             // クレジットカード番号入力のフォーマット
+            function formatDateInput2() {
+                const input = document.getElementById('cardNumber');
+                let value = input.value.replace(/[^0-9]/g, ''); // 数字以外を除去
+
+                if (value.length > 16) {
+                    value = value.substring(0, 16);
+                }
+                
+                input.value = value;
+            }
+        </script>
+    </div>
+</body>
+
+</html>
